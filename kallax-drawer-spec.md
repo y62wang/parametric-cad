@@ -10,13 +10,15 @@ IKEA Kallax shelf unit (4-slot configuration)
 | Internal cube H | 335 |
 | Internal cube D | 390 |
 
-## Drawer dimensions (target)
+## Drawer dimensions
 | | mm |
 |-|----|
 | W | 330 |
-| H | TBD — 4 drawers total (see open questions) |
+| H | 80 (4 stacked in 1 Kallax cube) |
 | D | 380 |
 | Count | 4 |
+
+Height math: (335 - 5×3mm gap) / 4 ≈ 80mm per drawer
 
 ## Construction
 | Component | Material | Notes |
@@ -32,10 +34,24 @@ IKEA Kallax shelf unit (4-slot configuration)
 **Type**: Bottom-mount dovetail (no rollers)
 - Reason: side-mount impossible — only 2.5mm clearance per side
   `(335 - 330) / 2 = 2.5mm`
-- Channel mounts to **Kallax floor**, opening faces up, centered
+- Channel mounts to each **horizontal surface**, opening faces up, centered
 - Tongue mounts to **drawer bottom**, tongue faces down, centered
 - Lubrication: candle wax or PTFE spray
 - Rail length: 380mm total → 4 × 100mm printed segments joined end-to-end
+
+### Horizontal surfaces (1 per drawer)
+4 drawers require 4 rail mounting surfaces:
+
+| Level | Surface | Height from floor |
+|-------|---------|-------------------|
+| 1 (bottom) | Kallax floor (existing) | 0mm |
+| 2 | Divider shelf | ~83mm |
+| 3 | Divider shelf | ~166mm |
+| 4 | Divider shelf | ~249mm |
+
+**Divider shelves**: 3× wood panel (plywood/MDF), 330 × 390mm, ~6mm thick.
+Secured to Kallax side walls with printed L-brackets (×6 total, 2 per shelf).
+Rail channel screwed to top face of each shelf (+ Kallax floor for level 1).
 
 ## Existing modules (in parametric_organizer/)
 | File | Module | Use |
@@ -47,11 +63,8 @@ IKEA Kallax shelf unit (4-slot configuration)
 | drawer_rail.scad | `rail_tongue()` | Bottom rail tongue |
 
 ## Open questions
-- [ ] 4 drawers in how many cubes?
-  - Option A: 1 cube × 4 drawers each ~80mm tall (very shallow)
-  - Option B: 2 cubes × 2 drawers each ~160mm tall ← likely
-  - Option C: 4 cubes × 1 drawer each 330mm tall (full height per cube)
-- [ ] Board thickness: 6mm (default) or thicker for larger panels?
-- [ ] Drawer front: flush with Kallax face, slight overhang, or separate decorative face?
+- [x] 4 drawers in how many cubes? → 4 stacked in 1 cube
+- [ ] Board thickness: 6mm (default) or thicker for rigidity on large panels?
+- [ ] Drawer front: flush with Kallax face, or slight overhang?
 - [ ] Handle: printed handle or none?
 - [ ] Stop mechanism: prevent drawer from pulling out fully?
