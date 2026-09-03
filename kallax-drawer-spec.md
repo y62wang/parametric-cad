@@ -1,7 +1,10 @@
 # Kallax Drawer System — Spec
 
 ## Target furniture
-IKEA Kallax shelf unit (4-slot configuration)
+IKEA Kallax shelf unit — 1 cube, 4 stacked drawers
+
+## Printer
+Elegoo Neptune 2 — build plate **256 × 256mm**
 
 ## Kallax dimensions
 | | mm |
@@ -11,60 +14,90 @@ IKEA Kallax shelf unit (4-slot configuration)
 | Internal cube D | 390 |
 
 ## Drawer dimensions
-| | mm |
-|-|----|
-| W | 330 |
-| H | 80 (4 stacked in 1 Kallax cube) |
-| D | 380 |
-| Count | 4 |
+| | mm | Notes |
+|-|----|----|
+| W (external) | 330 | 2.5mm clearance each side in Kallax |
+| H (external) | 80 | 4 stacked: (335 − 4×3mm gap) / 4 ≈ 80mm |
+| D (external) | 380 | 10mm shorter than Kallax depth |
+| Board thickness | 5mm | |
+| Count | 4 | |
 
-Height math: (335 - 5×3mm gap) / 4 ≈ 80mm per drawer
+## Panel dimensions (with board_t = 5mm)
+Construction: side panels are full depth; front/back fit between sides.
 
-## Construction
-| Component | Material | Notes |
-|-----------|----------|-------|
-| Side panels | PLA/PETG printed, 6mm | Split into segments, lap-joint |
-| Front panel | PLA/PETG printed, 6mm | Split into segments, lap-joint |
-| Back panel | PLA/PETG printed, 6mm | Split into segments, lap-joint |
-| Bottom board | Wood (plywood/MDF) | Too large to print; ~330×380mm |
-| Corner joints | PLA/PETG printed | Reuse corner_joint.scad |
-| Drawer rail | PLA/PETG printed | Bottom-mount dovetail (see below) |
+| Panel | External size | Split halves | Fits on 256mm bed? |
+|-------|--------------|-------------|-------------------|
+| Side (×2 per drawer) | 380 × 80 × 5mm | 2× (190 × 80mm) | ✓ |
+| Front (×1 per drawer) | 320 × 80 × 5mm | 2× (160 × 80mm) | ✓ |
+| Back (×1 per drawer) | 320 × 80 × 5mm | 2× (160 × 80mm) | ✓ |
+
+Front/back width = 330 − 2×5 = 320mm (fits between sides)
+
+## Print plan — 4 drawers total
+
+### Pieces per drawer
+| Piece | Count | Size |
+|-------|-------|------|
+| Side half-A (pins) | 2 | 190 × 80 × 5mm |
+| Side half-B (holes) | 2 | 190 × 80 × 5mm |
+| Front/back half-A | 4 | 160 × 80 × 5mm |
+| Front/back half-B | 4 | 160 × 80 × 5mm |
+| Corner joints | 4 | ~23 × 23 × 12mm |
+| Rail tongue segments | 4 | ~95 × 20 × 8mm |
+
+### Total across 4 drawers
+| Piece | Total | Per plate | Plates |
+|-------|-------|-----------|--------|
+| Side half-A | 8 | 3 | 3 |
+| Side half-B | 8 | 3 | 3 |
+| Front/back half-A | 16 | 3 | 6 |
+| Front/back half-B | 16 | 3 | 6 |
+| Corner joints | 16 | 8 | 2 |
+| Rail tongue segments | 16 | 8 | 2 |
+| Rail channel segments | 16 | 8 | 2 |
+| Divider L-brackets | 6 | 6 | 1 |
+| **Total** | | | **~25 plates** |
+
+Plate packing for panels (printed flat, 5mm tall):
+- 190×80mm pieces: 3 per plate (1 wide × 3 tall in 256mm)
+- 160×80mm pieces: 3 per plate (1 wide × 3 tall)
 
 ## Rail system
 **Type**: Bottom-mount dovetail (no rollers)
-- Reason: side-mount impossible — only 2.5mm clearance per side
-  `(335 - 330) / 2 = 2.5mm`
-- Channel mounts to each **horizontal surface**, opening faces up, centered
-- Tongue mounts to **drawer bottom**, tongue faces down, centered
-- Lubrication: candle wax or PTFE spray
-- Rail length: 380mm total → 4 × 100mm printed segments joined end-to-end
+- Side-mount ruled out: only 2.5mm clearance per side `(335−330)/2`
+- Channel: mounts to horizontal surface, opening faces up, centered
+- Tongue: mounts to drawer bottom board, centered
+- Lube: candle wax or PTFE spray
+- Rail length: 380mm → 4 × 95mm printed segments per drawer
 
-### Horizontal surfaces (1 per drawer)
-4 drawers require 4 rail mounting surfaces:
-
-| Level | Surface | Height from floor |
-|-------|---------|-------------------|
-| 1 (bottom) | Kallax floor (existing) | 0mm |
+### Horizontal surfaces (rail mounting points)
+| Level | Surface | Height from Kallax floor |
+|-------|---------|--------------------------|
+| 1 | Kallax floor (existing) | 0mm |
 | 2 | Divider shelf | ~83mm |
 | 3 | Divider shelf | ~166mm |
 | 4 | Divider shelf | ~249mm |
 
-**Divider shelves**: 3× wood panel (plywood/MDF), 330 × 390mm, ~6mm thick.
-Secured to Kallax side walls with printed L-brackets (×6 total, 2 per shelf).
-Rail channel screwed to top face of each shelf (+ Kallax floor for level 1).
+**Divider shelves**: 3× wood (330 × 390mm, ~6mm). Secured with 6× printed L-brackets.
 
-## Existing modules (in parametric_organizer/)
-| File | Module | Use |
-|------|--------|-----|
-| drawer_board.scad | `board_half(a/b)` | Panel segments with lap joint |
-| drawer_connectors.scad | `corner_joint()` | 90° corners |
-| drawer_connectors.scad | `flat_splice()` | Flat end-to-end join (alt to lap) |
+## Buy list
+| Item | Qty | Size |
+|------|-----|------|
+| Plywood/MDF (divider shelves) | 3 | 330 × 390mm, 6mm |
+| Plywood/MDF (drawer bottoms) | 4 | 320 × 370mm, 6mm |
+| M3 × 15mm screws | ~60 | For rails + brackets |
+
+## Source files (parametric_organizer/)
+| File | Module | Role |
+|------|--------|------|
+| drawer_board.scad | `board_half()` | Panel halves with lap joint |
+| drawer_connectors.scad | `corner_joint()` | 90° corner connectors |
 | drawer_rail.scad | `rail_channel()` | Bottom rail channel |
 | drawer_rail.scad | `rail_tongue()` | Bottom rail tongue |
 
 ## Open questions
-- [x] 4 drawers in how many cubes? → 4 stacked in 1 cube
-- [ ] Board thickness: 6mm (default) or thicker for rigidity on large panels?
+- [x] Board thickness → 5mm
+- [x] 4 drawers, stacked in 1 cube
 - [ ] Drawer front: flush with Kallax face, or slight overhang?
-- [ ] Handle: printed handle or none?
-- [ ] Stop mechanism: prevent drawer from pulling out fully?
+- [ ] Handle
+- [ ] Stop mechanism (prevent full pull-out)
