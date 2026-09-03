@@ -22,16 +22,24 @@ WALL     =  1.5; // outer wall thickness
 FLOOR    =  1.5; // solid base below bores
 CHAMFER  =  2.0; // entry bevel
 
-// Outer dimensions — computed from spacing, rounded to multiples of 10
-// Formula: cols*(d+spacing) + spacing + 2*wall
-// W_raw = 3*(15+3) + 3 + 3 = 60  → already multiple of 10 ✓
-// L_raw = 5*(15+3) + 3 + 3 = 96  → round up to 100
-W = 60;    // outer width
-L = 100;   // outer length
-// H = 50 ✓
+// Outer dimensions auto-computed from SPACING so all gaps are equal:
+//   W = COLS*(BORE_D+SPACING) + SPACING + 2*WALL
+//   L = ROWS*(BORE_D+SPACING) + SPACING + 2*WALL
+//
+// Math check (SPACING=3, D=15, WALL=1.5):
+//   W = 3*(15+3) + 3 + 3     = 54 + 6   = 60 mm
+//   L = 5*(15+3) + 3 + 3     = 90 + 6   = 96 mm
+//   inner_W = 60 - 3         = 57 mm
+//   inner_L = 96 - 3         = 93 mm
+//   x_border = x_gap = SPACING = 3 mm  ✓ (left=right=between = 3mm)
+//   y_border = y_gap = SPACING = 3 mm  ✓ (top=bottom=between = 3mm)
+W = COLS*(BORE_D + SPACING) + SPACING + 2*WALL;   // 60 mm
+L = ROWS*(BORE_D + SPACING) + SPACING + 2*WALL;   // 96 mm
+// H = 50 is set above; floor subtracts inward
 
 echo(str("Outer   : ", W, " × ", L, " × ", H, " mm"));
-echo(str("Spacing : ", SPACING, " mm  (border = gap = even grid)"));
+echo(str("Inner   : ", W-2*WALL, " × ", L-2*WALL, " mm"));
+echo(str("Spacing : ", SPACING, " mm everywhere (border = gap → perfectly even)"));
 
 organizer_box([
     ["w",          W],
@@ -43,8 +51,7 @@ organizer_box([
 
     ["insert_type",    "circle_array"],
     ["insert_d",       BORE_D],
-    ["insert_gap",     SPACING],
-    ["insert_border",  SPACING],   // ← equal to gap → uniform spacing
+    ["insert_spacing", SPACING],   // ← single value: gap = border = SPACING
     ["insert_cols",    COLS],
     ["insert_rows",    ROWS],
     ["insert_chamfer", CHAMFER],

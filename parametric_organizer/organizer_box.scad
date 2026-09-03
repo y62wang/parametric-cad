@@ -270,27 +270,35 @@ module _solid_bore_box(spec, iw, il, h, wall, ow, ol,
 module _bore_array(spec, rw, rl, h) {
     type    = ocfg(spec,"insert_type", ocfg(spec,"type",undef));
     d       = ocfg(spec,"insert_d",    ORG_INSERT_D);
-    gap     = ocfg(spec,"insert_gap",  ORG_INSERT_GAP);
-    fl_keep = ocfg(spec,"floor",       ORG_FLOOR);   // material left at base
+    fl_keep = ocfg(spec,"floor",       ORG_FLOOR);
     depth   = ocfg(spec,"insert_depth",h - fl_keep);
     chamfer = ocfg(spec,"insert_chamfer",ORG_INSERT_CHAMFER);
-    step    = d + gap;
-    acols   = floor((rw + gap) / step);
-    arows   = floor((rl + gap) / step);
-    cols    = ocfg(spec,"insert_cols", acols);
-    rows    = ocfg(spec,"insert_rows", arows);
 
-    // border = space from inner wall to first bore edge.
-    // Default: border = gap  →  every gap (between bores AND at edges)
-    // is identical, giving even/pretty spacing.
-    // Override with ["insert_border", N] for a different border width.
-    _border_default = ORG_INSERT_BORDER != undef ? ORG_INSERT_BORDER : gap;
-    border  = ocfg(spec, "insert_border", _border_default);
-    x0      = border;
-    y0      = border;
+    // insert_spacing sets gap AND border to the same value (equal spacing).
+    // Use insert_gap / insert_border to control them independently.
+    _spacing = ocfg(spec, "insert_spacing", undef);
+    gap      = _spacing != undef ? _spacing : ocfg(spec,"insert_gap", ORG_INSERT_GAP);
+    border   = _spacing != undef ? _spacing :
+               ocfg(spec, "insert_border",
+                    ORG_INSERT_BORDER != undef ? ORG_INSERT_BORDER : gap);
+
+    step  = d + gap;
+    acols = floor((rw + gap) / step);
+    arows = floor((rl + gap) / step);
+    cols  = ocfg(spec,"insert_cols", acols);
+    rows  = ocfg(spec,"insert_rows", arows);
+
+    x0 = border;
+    y0 = border;
+
+    // Math validation
+    right_border  = rw - (border + (cols-1)*step + d);
+    top_border    = rl - (border + (rows-1)*step + d);
 
     echo(str("bore_array: ", cols, "×", rows, "=", cols*rows,
              "  d=", d, "  gap=", gap, "  border=", border,
+             "  right_border=", right_border,
+             "  top_border=", top_border,
              "  depth=", depth));
 
     for (r=[0:rows-1], c=[0:cols-1]) {
