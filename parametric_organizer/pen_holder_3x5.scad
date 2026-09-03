@@ -26,21 +26,23 @@ WALL    =  1.5;  // outer wall thickness
 FLOOR   =  1.5;  // solid base below bores
 CHAMFER =  2.0;  // entry bevel
 
-STEP = BORE_D + GAP;         // 17 mm
-IW   = COLS * STEP - GAP;    // 49 mm
-IL   = ROWS * STEP - GAP;    // 83 mm
+// w/l = OUTER dimensions  →  inner = w - 2×wall
+STEP = BORE_D + GAP;                 // 17 mm
+W    = COLS * STEP - GAP + 2*WALL;  // 52 mm  outer width
+L    = ROWS * STEP - GAP + 2*WALL;  // 86 mm  outer length
 
-echo(str("Outer: ", IW+2*WALL, " × ", IL+2*WALL, " × ", H, " mm"));
+echo(str("Outer: ", W, " × ", L, " × ", H, " mm"));
+echo(str("Inner: ", W-2*WALL, " × ", L-2*WALL, " mm"));
 echo(str("Slots: ", COLS, "×", ROWS, " = ", COLS*ROWS,
          "  bore Ø ", BORE_D, " mm"));
 
 organizer_box([
-    ["inner_w",       IW],
-    ["inner_l",       IL],
-    ["height",         H],
-    ["wall",        WALL],
-    ["floor",      FLOOR],
-    ["corner_r",     3.0],
+    ["w",          W],      // outer width  — walls subtract inward
+    ["l",          L],      // outer length
+    ["height",     H],
+    ["wall",    WALL],
+    ["floor",  FLOOR],
+    ["corner_r", 3.0],
 
     ["insert_type",  "circle_array"],
     ["insert_d",     BORE_D],

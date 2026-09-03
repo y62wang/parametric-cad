@@ -31,8 +31,11 @@
 // ── Container spec keys ───────────────────────────────────────
 //
 //   REQUIRED
-//   inner_w, inner_l  (mm)  interior cavity dimensions
-//   height            (mm)  total height including floor
+//   w, l         (mm)  OUTER dimensions  ← "w=20" means the outside is 20mm
+//   height       (mm)  total height including floor
+//
+//   Legacy aliases (still accepted):
+//   inner_w, inner_l  → outer = inner + 2×wall  (deprecated, use w/l)
 //
 //   OPTIONAL — geometry
 //   wall          (mm)  side wall thickness        [ORG_WALL]
@@ -92,19 +95,30 @@ function ocfg(spec, key, default=undef) =
 // =============================================================
 
 module organizer_box(spec) {
-    iw   = ocfg(spec, "inner_w");
-    il   = ocfg(spec, "inner_l");
-    h    = ocfg(spec, "height");
     wall = ocfg(spec, "wall",  ORG_WALL);
+    // h / height = OUTER height — floor subtracts inward (same rule as w/l)
+    h    = ocfg(spec, "h", ocfg(spec, "height", undef));
     cr   = ocfg(spec, "corner_r", ORG_CORNER_R);
+
+    // ── Outer dimensions (w/l = outer; inner_w/inner_l = legacy) ─
+    _w_outer  = ocfg(spec, "w",       undef);
+    _w_legacy = ocfg(spec, "inner_w", undef);
+    ow = _w_outer  != undef ? _w_outer  :
+         _w_legacy != undef ? _w_legacy + 2*wall : undef;
+
+    _l_outer  = ocfg(spec, "l",       undef);
+    _l_legacy = ocfg(spec, "inner_l", undef);
+    ol = _l_outer  != undef ? _l_outer  :
+         _l_legacy != undef ? _l_legacy + 2*wall : undef;
+
+    // Inner cavity = outer minus walls
+    iw = ow - 2*wall;
+    il = ol - 2*wall;
 
     r_fl = ocfg(spec, "corner_r_fl", cr);
     r_fr = ocfg(spec, "corner_r_fr", cr);
     r_bl = ocfg(spec, "corner_r_bl", cr);
     r_br = ocfg(spec, "corner_r_br", cr);
-
-    ow = iw + 2*wall;
-    ol = il + 2*wall;
 
     ir_fl = max(0, r_fl - wall);
     ir_fr = max(0, r_fr - wall);
@@ -129,8 +143,13 @@ module organizer_box(spec) {
                               ocfg(inserts_list[0], "insert_type", undef))
                        : undef;
 
-    assert(iw > 0, "inner_w must be > 0");
-    assert(il > 0, "inner_l must be > 0");
+    assert(ow != undef, "Spec must include 'w' (outer width) or 'inner_w'");
+    assert(ol != undef, "Spec must include 'l' (outer length) or 'inner_l'");
+    assert(h  != undef, "Spec must include 'h' or 'height' (outer height)");
+    assert(iw > 0, str("Wall too thick: w=", ow, " wall=", wall,
+                        " → inner=", iw, " (must be > 0)"));
+    assert(il > 0, str("Wall too thick: l=", ol, " wall=", wall,
+                        " → inner=", il, " (must be > 0)"));
 
     // ── Dispatch on primary insert type ──────────────────────
     if (prim_type == "circle_array" || prim_type == "pen") {
@@ -198,10 +217,18 @@ module organizer_box(spec) {
 // =============================================================
 
 function box_outer_w(spec) =
-    ocfg(spec,"inner_w") + 2*ocfg(spec,"wall",ORG_WALL);
+    let(wall = ocfg(spec,"wall",ORG_WALL),
+        w    = ocfg(spec,"w",       undef),
+        iw   = ocfg(spec,"inner_w", undef))
+    w  != undef ? w  :
+    iw != undef ? iw + 2*wall : undef;
 
 function box_outer_l(spec) =
-    ocfg(spec,"inner_l") + 2*ocfg(spec,"wall",ORG_WALL);
+    let(wall = ocfg(spec,"wall",ORG_WALL),
+        l    = ocfg(spec,"l",       undef),
+        il   = ocfg(spec,"inner_l", undef))
+    l  != undef ? l  :
+    il != undef ? il + 2*wall : undef;
 
 
 // =============================================================
