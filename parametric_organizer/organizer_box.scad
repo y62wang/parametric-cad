@@ -279,12 +279,19 @@ module _bore_array(spec, rw, rl, h) {
     arows   = floor((rl + gap) / step);
     cols    = ocfg(spec,"insert_cols", acols);
     rows    = ocfg(spec,"insert_rows", arows);
-    x0      = (rw - (cols*step - gap)) / 2;
-    y0      = (rl - (rows*step - gap)) / 2;
+
+    // border = space from inner wall to first bore edge.
+    // Default: border = gap  →  every gap (between bores AND at edges)
+    // is identical, giving even/pretty spacing.
+    // Override with ["insert_border", N] for a different border width.
+    _border_default = ORG_INSERT_BORDER != undef ? ORG_INSERT_BORDER : gap;
+    border  = ocfg(spec, "insert_border", _border_default);
+    x0      = border;
+    y0      = border;
 
     echo(str("bore_array: ", cols, "×", rows, "=", cols*rows,
-             " bores  d=", d, "  depth=", depth,
-             "  floor_keep=", fl_keep));
+             "  d=", d, "  gap=", gap, "  border=", border,
+             "  depth=", depth));
 
     for (r=[0:rows-1], c=[0:cols-1]) {
         cx = x0 + c*step + d/2;

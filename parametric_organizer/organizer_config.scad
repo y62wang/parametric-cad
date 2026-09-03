@@ -44,6 +44,9 @@ ORG_INSERT_SLOT_T      =  1.0;  // mm  slot thickness (card ~0.8, USB ~4)
 //
 // all types
 ORG_INSERT_GAP         =  3.0;  // mm  spacing between recesses
+ORG_INSERT_BORDER      = undef; // mm  space from inner wall to first recess
+                                 //     undef → defaults to ORG_INSERT_GAP
+                                 //     (equal border + gap = even/pretty spacing)
 ORG_INSERT_CHAMFER     =  1.5;  // mm  bevel on top rim of every recess
                                  //     so items slide in; set 0 to disable
 

@@ -2,49 +2,49 @@
 // pen_holder_3x5.scad
 // 3 × 5 pen / toothbrush / marker holder.
 //
-// Uses organizer_box with circle_array insert:
-//   → solid block outer shell WITH walls by default
-//   → cylindrical bores drilled from the top
-//
 // Bore Ø 15 mm — fits pens ≤ 14 mm, markers ≤ 14 mm,
 //                      toothbrush handles ≤ 13 mm
 // 3 cols × 5 rows = 15 slots  |  height = 50 mm
-// Outer: 52 × 86 × 50 mm
-// Slicer tip: 2–3 perimeters, 15 % infill, 0.2 mm layers
+// Outer: 60 × 100 × 50 mm  (all multiples of 10)
+// Even 3 mm spacing: border = gap = 3 mm → uniform grid appearance
 // =============================================================
 
 include <organizer_box.scad>
 
 $fn = $preview ? 72 : 36;
 
-BORE_D  = 15;    // bore diameter
-GAP     =  2;    // wall between adjacent bores
-COLS    =  3;    // columns
-ROWS    =  5;    // rows
-H       = 50;    // height (mm)
-WALL    =  1.5;  // outer wall thickness
-FLOOR   =  1.5;  // solid base below bores
-CHAMFER =  2.0;  // entry bevel
+BORE_D   = 15;   // bore diameter (mm)
+SPACING  =  3;   // gap between bores AND from wall to first bore (equal → even)
+COLS     =  3;   // columns
+ROWS     =  5;   // rows
+H        = 50;   // outer height (mm)
+WALL     =  1.5; // outer wall thickness
+FLOOR    =  1.5; // solid base below bores
+CHAMFER  =  2.0; // entry bevel
 
-// Outer dimensions — all multiples of 10, walls subtract inward
-W = 60;   // outer width  (inner = 57 mm → fits 3 cols @ step 17 mm)
-L = 90;   // outer length (inner = 87 mm → fits 5 rows @ step 17 mm)
-// H = 50 already a multiple of 10
+// Outer dimensions — computed from spacing, rounded to multiples of 10
+// Formula: cols*(d+spacing) + spacing + 2*wall
+// W_raw = 3*(15+3) + 3 + 3 = 60  → already multiple of 10 ✓
+// L_raw = 5*(15+3) + 3 + 3 = 96  → round up to 100
+W = 60;    // outer width
+L = 100;   // outer length
+// H = 50 ✓
 
-echo(str("Outer: ", W, " × ", L, " × ", H, " mm"));
-echo(str("Inner: ", W-2*WALL, " × ", L-2*WALL, " mm"));
+echo(str("Outer   : ", W, " × ", L, " × ", H, " mm"));
+echo(str("Spacing : ", SPACING, " mm  (border = gap = even grid)"));
 
 organizer_box([
-    ["w",          W],      // outer width  — walls subtract inward
-    ["l",          L],      // outer length
-    ["height",     H],
+    ["w",          W],
+    ["l",          L],
+    ["h",          H],
     ["wall",    WALL],
     ["floor",  FLOOR],
     ["corner_r", 3.0],
 
-    ["insert_type",  "circle_array"],
-    ["insert_d",     BORE_D],
-    ["insert_gap",      GAP],
+    ["insert_type",    "circle_array"],
+    ["insert_d",       BORE_D],
+    ["insert_gap",     SPACING],
+    ["insert_border",  SPACING],   // ← equal to gap → uniform spacing
     ["insert_cols",    COLS],
     ["insert_rows",    ROWS],
     ["insert_chamfer", CHAMFER],
