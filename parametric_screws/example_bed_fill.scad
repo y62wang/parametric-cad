@@ -72,11 +72,10 @@ zone_pack(
 // Useful: echo item counts for every ANSI gauge at current gap
 // ─────────────────────────────────────────────────────────────
 
-/*
+
 for (spec = ansi_wood_screw_catalog) {
     fp = screw_footprint(spec);
     echo(str(cfg(spec,"size"),
              "  fp=", fp,
              "  fits=", grid_count(fp, gap=2)));
 }
-*/
