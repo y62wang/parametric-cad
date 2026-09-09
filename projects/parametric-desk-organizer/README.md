@@ -55,7 +55,7 @@ render and export from OpenSCAD.
 Run the project tests from the repository root:
 
 ```bash
-./test.sh
+./projects/parametric-desk-organizer/tests/run_tests.sh
 ```
 
 ## Validation status

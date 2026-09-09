@@ -19,6 +19,7 @@ thrown onto the ground.
 | Feature | Default |
 |---|---:|
 | Main body | 235 × 110 × 240 mm |
+| Alternate v2 body export | 235 × 125 × 180 mm |
 | Body wall / bottom | 3.0 / 3.2 mm |
 | Body cutouts | 88 mm diameter |
 | Clear port opening | 82 mm diameter |
@@ -29,6 +30,8 @@ thrown onto the ground.
 
 - `src/chicken_low_waste_feeder.scad` — editable source with selectable parts.
 - `files/feeder_body.3mf` — main body and internal baffle.
+- `files/feeder_body_v2.3mf` — shorter, deeper 235 × 125 × 180 mm body
+  alternative retained for slicer and physical comparison.
 - `files/feeder_lid.3mf` — slip-on lid.
 - `files/feeder_port.3mf` — one removable port collar; print two.
 - `files/chicken_feeder.3mf` — assembled reference view, not a one-plate print.
@@ -67,6 +70,6 @@ position, baffle depth, feed-slot size, lid clearance, and collar fit.
 
 ## Validation status
 
-The individual body, lid, and port exports render as manifold solids. Feed
-flow, animal access, outdoor durability, and final collar fit still require
-physical testing.
+Both body alternatives, the lid, and the port export report as manifold
+solids. Feed flow, animal access, outdoor durability, and final collar fit
+still require physical testing.

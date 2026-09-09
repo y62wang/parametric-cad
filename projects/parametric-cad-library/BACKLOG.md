@@ -1,6 +1,7 @@
 # Parametric CAD Library — Backlog
 
-> Status: **idea list only** — nothing built yet (except `parametric_screws/`).
+> Status: **idea list** — screw generation and build-plate packing are already
+> implemented in this project.
 > Add rows freely; re-sort by priority when ready to pick next project.
 
 ## Fastener Ecosystem
@@ -95,7 +96,7 @@
 - **Countersinks / counterbores / clearance holes** are arguably higher ROI than screw bodies — model the negative space.
 - **PCB enclosures** = Boxes + PCB mounts + Panel cutouts + Vents; build the sub-components first.
 - **Dovetails + T-slots** share geometry with the joinery engine; consider a shared `joint_engine.scad`.
-- **Bearings pocket** can reuse the `parametric_screws` clearance-hole concept for OD/ID fits.
+- **Bearings pocket** can reuse the screw-library clearance-hole concept for OD/ID fits.
 - Standard data files to create alongside each family (like `wood_screws_ANSI_B18.6.1.csv`):
   - `washers_ANSI_B18.22.1.csv`
   - `nuts_ANSI_B18.2.2.csv`

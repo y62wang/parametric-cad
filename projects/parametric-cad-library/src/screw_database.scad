@@ -359,7 +359,7 @@ screw_catalog = [
 ];
 
 // ANSI B18.6.1 standard wood screw catalog (all gauges).
-// Source: parametric_screws/wood_screws_ANSI_B18.6.1.csv
+// Source: ../data/wood_screws_ANSI_B18.6.1.csv
 // Drive: slotted (ANSI standard); override drive_type for modern variants.
 ansi_wood_screw_catalog = [
     ws_0, ws_1, ws_2, ws_3, ws_4, ws_5, ws_6, ws_7,

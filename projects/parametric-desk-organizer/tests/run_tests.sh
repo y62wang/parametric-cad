@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# test.sh — run all test_*.scad files and report pass/fail
-# Usage: ./test.sh [optional: path/to/tests]
+# run_tests.sh — run all test_*.scad files and report pass/fail
+# Usage: ./run_tests.sh [optional: path/to/tests]
 #
 # Requires: openscad on PATH  (brew install openscad)
 # Each file is exported to /tmp/scad_test_<name>.stl
@@ -8,7 +8,8 @@
 
 set -euo pipefail
 
-DIR="${1:-projects/parametric-desk-organizer/tests}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR="${1:-$SCRIPT_DIR}"
 PASS=0
 FAIL=0
 ERRORS=()

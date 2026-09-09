@@ -17,6 +17,7 @@ Add a compact table for the overall size and critical fit dimensions.
 
 - `src/example.scad` — editable source and important parameters.
 - `files/example.3mf` — printable export.
+- `data/example.csv` — optional standards or dimensions used by the source.
 - Explain quantities when a file must be printed more than once.
 
 ## Recommended print settings
