@@ -9,7 +9,7 @@
 // Press F5 / F6 to run interactively.
 // =============================================================
 
-include <organizer_box.scad>
+include <../src/organizer_box.scad>
 
 $fn = 32;
 

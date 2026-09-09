@@ -87,7 +87,7 @@ Plate packing for panels (printed flat, 5mm tall):
 | Plywood/MDF (drawer bottoms) | 4 | 320 × 370mm, 6mm |
 | M3 × 15mm screws | ~60 | For rails + brackets |
 
-## Source files (parametric_organizer/)
+## Source files (`src/`)
 | File | Module | Role |
 |------|--------|------|
 | drawer_board.scad | `board_half()` | Panel halves with lap joint |

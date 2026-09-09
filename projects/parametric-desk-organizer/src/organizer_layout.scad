@@ -99,7 +99,7 @@ function find_position(placed, spec,
                 y + ol <= region[1] &&
                 len([for (p=placed)
                      if (_aabbs_overlap(_item_aabb(p),
-                                        [x, y, spec]))
+                                        [x, y, x + ow, y + ol]))
                      1]) == 0)
             [x, y]
         ]

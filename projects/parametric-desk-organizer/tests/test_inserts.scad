@@ -4,7 +4,7 @@
 // Containers are spread out for side-by-side comparison.
 // =============================================================
 
-include <organizer_layout.scad>
+include <../src/organizer_layout.scad>
 
 $fn = 48;
 
