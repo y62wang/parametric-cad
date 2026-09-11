@@ -1,5 +1,226 @@
 # Badminton racket wall hook
 
+## v2.6 SKÅDIS-only screwless slide-lock prototype — physical validation required
+
+v2.6 removes every screw hole, counterbore, heat-set insert pocket and metal
+fastener from the current design. It supports IKEA SKÅDIS only. The mounting
+back engages the pegboard with exactly two printed hooks at X = −20/+20 mm.
+The two lower pads bear against the board and are not connectors.
+
+The connected ten-position zigzag body remains one printable component. It
+slides down over two symmetrical vertical dovetail rails on the back. Closed
+top stops carry the normal downward and cantilever load. A separate all-printed
+clip is inserted from below after assembly; it fills the space beneath the
+seated rails and only prevents the body from lifting off.
+
+There are no visible front or rear fastening holes after assembly. v2.6 has no
+Multiboard, screw-mounted or metal-hardware output.
+
+The geometry provides ten racket positions but is not load-rated. The
+machine-readable status remains:
+
+`ten_racket_load_verified=false`
+
+`load_rating_status="physical_validation_required"`
+
+The released v2.2 package and the complete v2.3, v2.4 and v2.5 prototype
+packages are checksum-protected and unchanged. The isolated v2.6 package is
+stored under:
+
+- Editable source:
+  `src/prototypes/v2_6_skadis_screwless_slide_lock.scad`
+- Dimensional contract:
+  `tests/prototypes/v2_6/test_dimensions.scad`
+- Assembled Boolean harness:
+  `tests/prototypes/v2_6/test_interference.scad`
+- Standard-library mesh and protected-asset validator:
+  `tests/prototypes/v2_6/validate_meshes.py`
+- Generated-intersection validator:
+  `tests/prototypes/v2_6/validate_interference.py`
+- Protected v2.2-v2.5 checksums:
+  `tests/prototypes/v2_6/protected_v2_2_v2_3_v2_4_v2_5.sha256`
+- Printable meshes:
+  `files/prototypes/v2.6/`
+- Clean previews:
+  `previews/prototype-v2.6/`
+
+### v2.6 geometry
+
+| Feature | v2.6 screwless prototype |
+|---|---:|
+| Supported board | IKEA SKÅDIS only |
+| Metal hardware | none |
+| Screw or insert holes | none |
+| Mounting back | 72 × 72 × 10 mm |
+| Board-engaging connectors | exactly two printed hooks |
+| Hook positions | X = −20/+20 mm, Z = 58 mm |
+| Lower features | two bearing supports at X = −20/+20 mm, Z = 11 mm |
+| Structural interface | two downward-engaging dovetail rails |
+| Rail centres | X = −20/+20 mm |
+| Rail engagement | 36 mm, Z = 18–54 mm |
+| Male rail | 6.0 mm projection; 8.0 mm neck; 12.0 mm crown |
+| Nominal female channel | 8.6 mm mouth; 12.6 mm crown; 6.4 mm depth |
+| Nominal clearance | 0.30 mm per side; 0.40 mm in depth |
+| Rail lead-in | 1.5 mm |
+| Rail roots | minimum R2 mm |
+| Closed top stop | 4 mm |
+| Solid heel front wall | 7.6 mm |
+| Anti-lift service space | 8 mm below the seated rails |
+| Body heel | 72 mm wide × 14 mm deep |
+| Root flare | 52 mm before tapering to the arm |
+| Arm | 28 × 36 mm; 221 mm projection |
+| Racket positions | 10 |
+| Racket centres | X = 0; Y = 23 + 21i mm |
+| Opening sequence | left/right alternating; five of each |
+| Reverse body | right/left alternating; five of each |
+| Pocket and entry | Ø8.8 mm pocket; 6.6 mm one-sided entry |
+| Opposite-side ligament | 9.6 mm |
+| Adjacent-pocket web | 12.2 mm |
+| Declared print bed | 256 × 256 mm |
+
+### Printable v2.6 files
+
+- `v2_6_connected_body_start_left_screwless.3mf` — one-piece ten-position
+  connected body beginning with a left opening.
+- `v2_6_connected_body_start_right_screwless.3mf` — one-piece reverse body
+  beginning with a right opening.
+- `v2_6_skadis_back_two_hook_slide_lock.3mf` — 10 mm back with exactly two
+  printed SKÅDIS hooks, two lower bearing pads and two structural dovetails.
+- `v2_6_anti_lift_clip.3mf` — replaceable underside clip. It prevents upward
+  removal and is not the cantilever load path.
+- `v2_6_skadis_two_hook_fit_coupon.3mf` — reduced-material real-board fit
+  check using the final hooks and lower pads.
+- `v2_6_dovetail_tolerance_coupon_020_030_040.3mf` — one fixed three-rail
+  base plus three removable female sliders. The intentional mesh component
+  count is four.
+
+Every production body, back, clip and board-fit coupon validates as one mesh
+object and one closed manifold component. The tolerance matrix validates as
+one mesh object containing four intentional connected components. Every 3MF
+has minimum Z = 0 and fits the declared print bed.
+
+### Choosing the dovetail tolerance
+
+Print the tolerance matrix before the full body and back:
+
+1. Keep the three female sliders aligned with their original positions on the
+   print plate.
+2. One raised mark identifies 0.20 mm side clearance, two marks identify
+   0.30 mm and three marks identify 0.40 mm.
+3. Test each slider on its matching fixed rail after the parts cool fully.
+4. Select the smallest clearance that slides through the complete travel by
+   hand without forcing, cracking or binding and without perceptible rocking.
+5. The supplied full v2.6 body uses the nominal 0.30 mm-per-side channel. If
+   the coupon selects another value, adjust `rail_side_clearance` and regenerate
+   both bodies before printing them.
+
+Do not sand only one rail or channel to compensate for printer skew. Correct
+the printer or regenerate the model with the verified clearance.
+
+### Assembly and removal
+
+1. Print and test the SKÅDIS fit coupon on the actual board first. Both hooks
+   must enter together, both lower pads must touch and the coupon must not
+   rock.
+2. Install the full back on the board with the two printed hooks.
+3. Align both body channels above the two rails.
+4. Slide the body straight down until both rails seat against the closed top
+   stops. Do not twist one rail on ahead of the other.
+5. From underneath, push the anti-lift clip upward into the two open channel
+   ends until both detents seat. The clip should remain flush beneath the heel.
+
+To remove the body, pull the replaceable clip straight down from underneath,
+lift the unloaded body vertically until both rails clear the channels, then
+remove the back from the board. Do not lever the arm sideways to release it.
+
+### Printing
+
+- Print either body in the supplied broad-face-down orientation. The racket
+  pockets and entries require no internal support.
+- Print the SKÅDIS back in the supplied edge orientation so the hook profiles
+  lie in the layer plane. Keep supports away from the hook engagement faces
+  and dovetail flanks.
+- Print the anti-lift clip and both coupons in their supplied orientations.
+- Inspect the hook roots, dovetail roots, channel mouths, clip prongs and every
+  zigzag ligament for under-extrusion, gaps or cracks before assembly.
+
+Material, layer height, temperature, cooling, perimeter count and board
+installation all affect strength. The model does not assign a safe working
+load.
+
+### Required v2.6 physical validation
+
+Do not install valuable rackets until all checks pass on the real SKÅDIS board
+and its actual wall attachment:
+
+1. Verify the two-hook coupon seats without forcing, partial engagement, board
+   deformation or rocking.
+2. Verify the chosen dovetail coupon through the complete travel and confirm
+   both full-size rails seat together.
+3. Complete at least 25 body installation/removal cycles. Reject cracking,
+   whitening, increased play, detent damage or a clip that migrates downward.
+4. Fit representative smallest and largest racket shafts in the Ø8.8 mm
+   pockets and confirm every 6.6 mm entry flexes without damage.
+5. Add ten real rackets gradually from the root towards the tip. Leave the
+   intended load in place for 24 hours. Reject hook movement, board rocking,
+   rail slip, clip movement, cracking or permanent tip set above 1 mm.
+6. Only after the sustained test passes, perform a supervised gradual 3 kg tip
+   proof load. Stop immediately at the first visible, audible or measured
+   change.
+
+Passing digital geometry checks does not replace these physical tests.
+
+### v2.6 rendering and validation
+
+Run the dimensional contract:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings \
+  -D 'render_mode="none"' \
+  -o /tmp/badminton_v2_6_dimensions.echo \
+  tests/prototypes/v2_6/test_dimensions.scad
+```
+
+Validate all six 3MFs, topology, minimum Z, print-bed bounds, the SKÅDIS-only
+source contract and all 83 protected v2.2-v2.5 assets:
+
+```sh
+python3 tests/prototypes/v2_6/validate_meshes.py \
+  files/prototypes/v2.6
+```
+
+Validate the assembled Booleans:
+
+```sh
+python3 tests/prototypes/v2_6/validate_interference.py
+```
+
+The interference validator requires:
+
+- no positive-volume intersection between the rails and channelled heel;
+- no positive-volume intersection between the clip and body;
+- only a zero-volume contact plane at Z = 18 mm between clip and rails; and
+- complete rail containment at Z = 52.48, 53.00, 53.50, 53.98 and 54.02 mm
+  through the tapered lead-in.
+
+Printable modes:
+
+- `body_start_left`
+- `body_start_right`
+- `screwless_skadis_back`
+- `anti_lift_clip`
+- `skadis_fit_coupon`
+- `dovetail_tolerance_coupon`
+
+Preview-only modes:
+
+- `preview_assembled_front_iso`
+- `preview_rear_two_hooks`
+- `preview_exploded_slide`
+- `preview_dovetail_closeup`
+- `preview_connected_zigzag`
+- `preview_print_orientations`
+
 ## v2.5 connected alternating-sawtooth prototype — physical validation required
 
 v2.5 replaces the disconnected v2.4 collar-chain architecture with one
