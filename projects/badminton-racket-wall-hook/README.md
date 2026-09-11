@@ -1,5 +1,190 @@
 # Badminton racket wall hook
 
+## v2.4 printable ten-position prototype — physical validation required
+
+v2.4 is the first printable full-length rotating-collar package. It provides
+exactly two printed SKÅDIS hooks or two centred Multiboard attachment points
+for external M4-compatible board hardware, a centred body with ten racket
+positions, ten replaceable left/right collars and a one-piece assembly cradle.
+It is a printable prototype rather than a released load-bearing product.
+
+The geometry is designed around ten centred racket positions. It cannot be
+claimed to carry ten actual rackets until the documented cycle test, 24-hour
+ten-racket test and supervised proof-load test all pass. The machine-readable
+model status is `ten_racket_load_verified=false` and
+`load_rating_status="physical_validation_required"`.
+
+The released v2.2 files and all v2.3 mechanism-test files remain unchanged.
+The isolated v2.4 package is stored under:
+
+- Editable source:
+  `src/prototypes/v2_4_printable_full_rack.scad`
+- Dimensional tests:
+  `tests/prototypes/v2_4/test_dimensions.scad`
+- Standard-library mesh and protected-asset validator:
+  `tests/prototypes/v2_4/validate_meshes.py`
+- Protected v2.2/v2.3 checksums:
+  `tests/prototypes/v2_4/protected_v2_2_v2_3.sha256`
+- Printable meshes:
+  `files/prototypes/v2.4/`
+- Clean previews:
+  `previews/prototype-v2.4/`
+
+### v2.4 geometry
+
+| Feature | v2.4 printable prototype |
+|---|---:|
+| Mounting back | 72 × 72 × 8 mm |
+| SKÅDIS printed hooks | exactly two at X = −20/+20 mm, Z = 58 mm |
+| SKÅDIS lower features | two board-bearing pads; they are not connectors |
+| Multiboard attachment points | exactly two centred holes at X = 0, Z = 11/61 mm |
+| Multiboard board hardware | two external M4-compatible fasteners required |
+| Multiboard pitch | 50 mm vertically |
+| Body and shaft alignment | X = 0 |
+| Designed racket positions | 10 |
+| Verified ten-racket load | no; physical validation required |
+| Racket centres | Y = 23, 44, 65, 86, 107, 128, 149, 170, 191, 212 mm |
+| Racket pitch | 21 mm |
+| Arm section | 28 × 36 mm |
+| Body projection | 226 mm |
+| Final stop-track tip margin | 4.4 mm |
+| Body print footprint | 72 × 229 mm |
+| Body components | 11: `ROOT`, `S2`…`S10`, `TIP` |
+| Nominal collars | 10: `R1`…`R10` |
+| One-piece cradle | 82 × 238 × 3.2 mm |
+| Cradle access holes | ten, Ø22 mm |
+| Declared print bed | 256 × 256 mm |
+
+Each 9 mm collar bore rotates through 180 degrees. At one hard stop its C
+opening faces right; at the other it faces left. Every shaft axis remains at
+X = 0 regardless of the selected insertion side.
+
+The ten full-width bilateral corridors divide the printed body into eleven
+closed sections. Place all sections in their matching cradle pockets, align
+`ROOT`, `S2` through `S10` and `TIP`, then install collars `R1` through `R10`
+through the matching Ø22 mm access holes. The collars locate the sections and
+bridge each corridor. Lift the connected assembly from the cradle only after
+all ten collars are fully seated.
+
+### Printable v2.4 files
+
+- `v2_4_full_body_sections.3mf` — all eleven centred body sections in their
+  assembled print layout.
+- `v2_4_full_rack_collars.3mf` — ten nominal rotating collars with snap-off
+  `R1`–`R10` labels.
+- `v2_4_full_rack_cradle.3mf` — one indexed cradle locating all eleven body
+  sections, with ten lower-lip access holes.
+- `v2_4_skadis_back_two_hook.3mf` — full SKÅDIS back with exactly two load
+  hooks and two separate lower bearing pads.
+- `v2_4_multiboard_back_two_mount.3mf` — full Multiboard back with exactly two
+  centred counterbored attachment points at 50 mm vertical pitch; external
+  M4-compatible Multiboard board hardware is required.
+- `v2_4_skadis_fit_coupon_two_hook.3mf` — lower-material two-hook fit coupon.
+- `v2_4_multiboard_fit_coupon_two_mount_50mm.3mf` — lower-material two-hole
+  Multiboard attachment-point fit coupon for external hardware.
+
+The required preview set shows:
+
+- Complete ten-position SKÅDIS and Multiboard layouts.
+- A rear SKÅDIS view showing two printed hooks.
+- A rear Multiboard view showing two actual holes labelled as external M4
+  attachment points at 50 mm pitch.
+- Actual right-side and left-side collar insertion positions.
+- All eleven sections and ten collars seated in the full assembly cradle.
+
+### v2.4 hardware list
+
+Both mounting variants require:
+
+- Four body-to-back M4 screws. The screw heads must fit the modelled
+  Ø8.2 × 4.2 mm body counterbores. Select a length that passes through the
+  remaining body heel thickness and reaches the heat-set inserts to the insert
+  manufacturer's recommended thread engagement without bottoming in the pocket
+  or protruding through the rear of the back.
+- Four matching M4 heat-set inserts sized for the modelled tapered pockets:
+  Ø5.9 mm entry, Ø5.4 mm tip and 6.2 mm depth. Confirm the chosen insert and
+  printer compensation with a fit sample before installing all four.
+
+The Multiboard variant additionally requires:
+
+- Two external Multiboard-compatible M4 board fasteners. Their heads must fit
+  the modelled Ø8.4 × 4.2 mm counterbores. Select the board-side hardware and
+  fastener engagement for the actual Multiboard tile and wall installation.
+  These fasteners are not printed or supplied by this model.
+
+### Required physical validation before release
+
+This design provides ten positions but is not physically verified to carry ten
+actual rackets. Do not install valuable rackets or treat it as load-rated until
+all of the following tests pass and are recorded:
+
+1. Print the v2.3 tolerance coupons first and select the collar fit that rotates
+   freely, retains both detents and accepts the smallest and largest real racket
+   shafts without damage.
+2. Test the v2.4 SKÅDIS and Multiboard fit coupons on the real boards. Confirm
+   both printed SKÅDIS hooks engage together or both external Multiboard M4
+   fasteners seat correctly, the back does not rock and the SKÅDIS lower pads
+   remain bearing surfaces only.
+3. Cycle the root, middle and tip collars from left to right at least 100 times.
+   Reject cracking, binding, snap-lip damage, section separation or loss of
+   detent feel.
+4. Assemble all eleven sections in the cradle and verify all ten collars are
+   fully captured before removing the rack.
+5. Mount ten real rackets for 24 hours. Reject SKÅDIS hook or Multiboard
+   fastener movement, board rocking, collar rotation, section separation,
+   cracking or permanent tip set greater than 1 mm.
+6. Only after the sustained test passes, perform a supervised gradual 3 kg tip
+   proof load. Stop immediately at the first visible, audible or measured
+   change. This load creates an approximate 6.6 N·m mounting moment and must
+   include the real board and its wall attachment.
+
+### Rendering and validation
+
+Run the dimensional contract from this project directory:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings \
+  -D 'render_mode="none"' \
+  -o /tmp/badminton_v2_4_dimensions.echo \
+  tests/prototypes/v2_4/test_dimensions.scad
+```
+
+Printable modes:
+
+- `full_body_sections`
+- `full_rack_collars`
+- `full_rack_cradle`
+- `skadis_back`
+- `multiboard_back`
+- `skadis_fit_coupon`
+- `multiboard_fit_coupon`
+
+Render a mode with:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings --backend Manifold \
+  -D 'render_mode="full_body_sections"' \
+  -o files/prototypes/v2.4/v2_4_full_body_sections.3mf \
+  src/prototypes/v2_4_printable_full_rack.scad
+```
+
+Validate every generated 3MF, its component count, closed/manifold topology,
+Z = 0 placement, 256 × 256 mm bed fit and all protected v2.2/v2.3 checksums:
+
+```sh
+python3 tests/prototypes/v2_4/validate_meshes.py \
+  files/prototypes/v2.4
+```
+
+Preview-only modes:
+
+- `preview_complete_skadis`
+- `preview_complete_multiboard`
+- `preview_skadis_rear`
+- `preview_multiboard_rear`
+- `preview_bilateral_operation`
+- `preview_full_cradle_assembly`
+
 ## v2.3 rotating-collar prototype — not yet released
 
 **This is an experimental fit and mechanism package. Do not print or load a
