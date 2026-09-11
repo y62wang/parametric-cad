@@ -1,5 +1,208 @@
 # Badminton racket wall hook
 
+## v2.7 dual-board screwless prototype — physical validation required
+
+v2.7 keeps the checksum-protected v2.6 ten-racket body, twin downward
+slide-lock and replaceable anti-lift clip. It adds separate 72 × 72 × 10 mm
+backs for IKEA SKÅDIS and Multiboard. Each back has exactly two printed board
+connectors, with no screw holes, counterbores, insert pockets or metal
+hardware.
+
+The body provides ten centred racket positions at 21 mm pitch with alternating
+left/right entries. It is not load-rated. The Multiboard interface is an
+independently modelled, parameterised prototype based on an assumed 7.2 mm
+hole; it does not copy an official snap mesh. Real board measurement, coupon
+selection and load testing remain mandatory.
+
+### Reproducible selected parameters
+
+Every full back is generated from
+`src/prototypes/v2_7_dual_board_screwless.scad` using the same printable mode
+and explicit command-line selectors.
+
+SKÅDIS selectors:
+
+- `selected_skadis_hook_w`: 4.0, 4.2 or 4.4 mm.
+- `selected_skadis_board_t`: 2.6, 3.0, 4.0 or 5.0 mm.
+- `selected_skadis_board_clearance`: fixed at 0.4 mm.
+- `selected_skadis_capture_depth`: derived as board thickness + 0.4 mm.
+
+Example:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings --backend Manifold \
+  -D 'render_mode="skadis_back"' \
+  -D 'selected_skadis_hook_w=4.2' \
+  -D 'selected_skadis_board_t=3.0' \
+  -D 'selected_skadis_board_clearance=0.4' \
+  -o /tmp/v2_7_skadis_back.3mf \
+  src/prototypes/v2_7_dual_board_screwless.scad
+```
+
+Multiboard selectors:
+
+- `selected_multiboard_catch_span`: 7.35, 7.60 or 7.85 mm.
+- `selected_multiboard_board_t`: 5.0, 6.0 or 7.0 mm.
+- `selected_multiboard_shoulder_depth`: board thickness + 0.35 mm.
+- `selected_multiboard_rear_clearance`: 9.0 mm − board thickness, preserving
+  the modelled 0.50 mm tip-to-stop margin with the 8.5 mm projection.
+
+Example:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings --backend Manifold \
+  -D 'render_mode="multiboard_back"' \
+  -D 'selected_multiboard_catch_span=7.60' \
+  -D 'selected_multiboard_board_t=6.0' \
+  -D 'selected_multiboard_shoulder_depth=6.35' \
+  -D 'selected_multiboard_rear_clearance=3.0' \
+  -o /tmp/v2_7_multiboard_back.3mf \
+  src/prototypes/v2_7_dual_board_screwless.scad
+```
+
+The source rejects selectors outside the packaged matrices and echoes all
+selected dimensions during each export.
+
+### Connector geometry
+
+The SKÅDIS variants retain exactly two downward hooks centred at X = −20/+20
+mm and Z = 58 mm, giving 40 mm horizontal pitch. The two lower features at
+X = −20/+20 mm and Z = 11 mm are board-bearing pads, not connectors. The
+slot-entering width and board capture vary only through the selected values in
+the filename. The lower neck edge uses a width-aware chamfer calculated
+against the unchanged 5.2 mm rounded slot. The 4.0, 4.2 and 4.4 mm necks reach
+full advertised width at approximately 1.089, 1.217 and 1.364 mm above the
+rounded slot bottom, respectively. Each retains more than 2.6 mm of full-width
+neck height for capture.
+
+The Multiboard variants retain exactly two centred split catches at X = 0 and
+Z = 11/61 mm, giving 50 mm vertical pitch. Each positive-retention shoulder is
+0.35 mm behind the selected board thickness. Four broad non-entering bearing
+lands resist rocking and are not additional connectors. The three spans and
+three board depths are experimental fit choices; none is designated as a
+verified production fit.
+
+### Multiboard print orientation and targeted support
+
+Print every Multiboard back upright on its original Z = 0 edge with no model
+rotation. The catch axis is Y and the split-flex axis is X, so both remain in
+the layer plane. Use a 6 mm brim.
+
+The horizontal catches still have axial undersides that need targeted support.
+Use painted organic/tree support with these controlled settings:
+
+- build plate only;
+- paint one underside region below each of the two catches;
+- 0.20 mm top interface gap;
+- 0.35 mm XY gap;
+- two interface layers;
+- 12% support density;
+- keep support out of the split and off the shoulder side faces.
+
+Apply the same targeted recipe to the male Multiboard coupon catches. Inspect
+and remove all underside support cleanly before testing fit. The transverse
+kite profile controls the connector envelope but does not eliminate this
+support requirement.
+
+Print SKÅDIS backs on the supplied long-edge orientation with a 6 mm brim. Keep
+any optional stabilising support away from the hook capture faces.
+
+### Exact printable inventory
+
+The package contains 32 3MF files: 12 SKÅDIS backs, 9 Multiboard backs and 11
+shared bodies, clips and coupons.
+
+SKÅDIS full backs:
+
+- `v2_7_skadis_back_hook4p0_board2p6_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p0_board3p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p0_board4p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p0_board5p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p2_board2p6_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p2_board3p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p2_board4p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p2_board5p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p4_board2p6_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p4_board3p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p4_board4p0_clear0p4.3mf`
+- `v2_7_skadis_back_hook4p4_board5p0_clear0p4.3mf`
+
+Multiboard full backs:
+
+- `v2_7_multiboard_back_catch7p35_board5p0_shoulder5p35.3mf`
+- `v2_7_multiboard_back_catch7p35_board6p0_shoulder6p35.3mf`
+- `v2_7_multiboard_back_catch7p35_board7p0_shoulder7p35.3mf`
+- `v2_7_multiboard_back_catch7p60_board5p0_shoulder5p35.3mf`
+- `v2_7_multiboard_back_catch7p60_board6p0_shoulder6p35.3mf`
+- `v2_7_multiboard_back_catch7p60_board7p0_shoulder7p35.3mf`
+- `v2_7_multiboard_back_catch7p85_board5p0_shoulder5p35.3mf`
+- `v2_7_multiboard_back_catch7p85_board6p0_shoulder6p35.3mf`
+- `v2_7_multiboard_back_catch7p85_board7p0_shoulder7p35.3mf`
+
+Shared bodies, clip and coupons:
+
+- `v2_7_connected_body_start_left.3mf`
+- `v2_7_connected_body_start_right.3mf`
+- `v2_7_anti_lift_clip.3mf`
+- `v2_7_dovetail_tolerance_coupon_020_030_040.3mf`
+- `v2_7_skadis_hook_width_coupon_40_42_44.3mf`
+- `v2_7_skadis_board_capture_coupon_26_30_40_50.3mf`
+- `v2_7_skadis_two_hook_pattern_coupon_40mm.3mf`
+- `v2_7_multiboard_catch_tolerance_coupon_735_760_785.3mf`
+- `v2_7_multiboard_retention_depth_coupon_5_6_7mm.3mf`
+- `v2_7_multiboard_two_catch_pattern_coupon_50mm.3mf`
+- `v2_7_three_pocket_racket_coupon_21mm.3mf`
+
+The obsolete generic back names
+`v2_7_skadis_back_two_hook_slide_lock.3mf` and
+`v2_7_multiboard_back_two_split_catch.3mf` are intentionally absent because
+they duplicated the 4.2/3.0/0.4 and 7.60/6.0/6.35 matrix entries. The two
+full-pattern coupon files remain intentionally because they test simultaneous
+40 mm and 50 mm connector engagement on a smaller print.
+
+### Fit and load validation
+
+1. Measure the real board and print the independent width/depth coupons.
+2. Choose the loosest variant that fully seats and positively retains without
+   whitening, cracking or excessive play.
+3. Print the matching full back from the filename matrix and confirm both
+   connectors and every bearing land seat together.
+4. Complete at least 25 unloaded installation/removal cycles.
+5. Add real rackets gradually from the root towards the tip, then hold the
+   intended ten-racket load for 24 hours. Reject movement, rocking, cracking,
+   rail slip, clip migration or permanent tip set above 1 mm.
+6. Treat the documented 3 kg tip calculation as a design audit only, not a safe
+   working load or proof that the wall and pegboard installation are adequate.
+
+### Validation
+
+The dimensional and interference checks run directly from the source. The mesh
+validator checks the exact 32-file inventory, topology, manifold closure,
+component counts, Z = 0 placement, 256 × 256 mm bed fit, all nine previews,
+101 protected v2.2–v2.6 assets, canonical v2.6 body/clip geometry, and current
+source parity. Source parity regenerates every 3MF into temporary storage using
+its recorded overrides and compares canonical geometry with the packaged file.
+The interference validator exercises all 12 SKÅDIS hook-width × board-thickness
+selectors against the same seated rounded-slot proxy and separately requires
+positive left and right retention for every selector.
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings --backend Manifold \
+  -D 'render_mode="none"' \
+  -o /tmp/badminton_v2_7_dimensions.echo \
+  tests/prototypes/v2_7/test_dimensions.scad
+
+python3 tests/prototypes/v2_7/validate_interference.py
+
+python3 tests/prototypes/v2_7/validate_meshes.py \
+  files/prototypes/v2.7
+```
+
+The nine preview PNGs remain under `previews/prototype-v2.7/`. They show the
+assembled and rear connector views, seated engagement, the slide-lock,
+centred ten-position sawtooth and print orientations without racket rods or an
+opaque wall.
+
 ## v2.6 SKÅDIS-only screwless slide-lock prototype — physical validation required
 
 v2.6 removes every screw hole, counterbore, heat-set insert pocket and metal
