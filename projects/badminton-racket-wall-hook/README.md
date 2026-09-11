@@ -1,5 +1,187 @@
 # Badminton racket wall hook
 
+## v2.5 connected alternating-sawtooth prototype — physical validation required
+
+v2.5 replaces the disconnected v2.4 collar-chain architecture with one
+continuous printable body. The heel, 40 mm root flare and complete arm are one
+closed manifold component with no collars, loose sections, gates, cradle or
+assembly joints.
+
+Ten centred racket pockets form an alternating sawtooth:
+
+`left, right, left, right, left, right, left, right, left, right`
+
+Each pocket has one side entry. The next pocket opens from the opposite side,
+while the solid load path switches sides and remains connected from the heel
+to the tip. A reverse body begins on the right. Both bodies keep every shaft
+axis on X = 0.
+
+The geometry provides ten positions but has not been physically verified to
+carry ten rackets. The machine-readable status remains
+`ten_racket_load_verified=false` and
+`load_rating_status="physical_validation_required"`.
+
+The released v2.2 package and the complete v2.3 and v2.4 prototype packages
+remain checksum-protected and unchanged. The isolated v2.5 package is stored
+under:
+
+- Editable source:
+  `src/prototypes/v2_5_connected_zigzag.scad`
+- Dimensional tests:
+  `tests/prototypes/v2_5/test_dimensions.scad`
+- Standard-library mesh and protected-asset validator:
+  `tests/prototypes/v2_5/validate_meshes.py`
+- Protected v2.2-v2.4 checksums:
+  `tests/prototypes/v2_5/protected_v2_2_v2_3_v2_4.sha256`
+- Printable meshes:
+  `files/prototypes/v2.5/`
+- Clean previews:
+  `previews/prototype-v2.5/`
+
+### v2.5 geometry
+
+| Feature | v2.5 connected prototype |
+|---|---:|
+| Body components | exactly one |
+| Racket positions | 10 |
+| Racket centres | X = 0; Y = 23, 44, 65, 86, 107, 128, 149, 170, 191, 212 mm |
+| Opening sequence | left/right alternating; five of each |
+| Reverse export | right/left alternating; five of each |
+| Racket pitch | 21 mm |
+| Nominal shaft | Ø7.2 mm |
+| Pocket | Ø8.8 mm |
+| One-sided entry | 6.6 mm |
+| Opposite-side continuous ligament | 9.6 mm |
+| Web between adjacent pocket edges | 12.2 mm |
+| Arm section | 28 × 36 mm |
+| Root flare | 40 mm |
+| Heel/root overlap | 1 mm |
+| Root/arm overlap | 1 mm |
+| Projection | 221 mm |
+| Tip margin after final pocket | 4.6 mm |
+| Body print footprint | 72 × 224 mm |
+| Mounting back | 72 × 72 × 8 mm |
+| Positive interface key | centred 40 × 20 × 3 mm |
+| Body fasteners | four M4 at X = −27/+27 mm and Z = 26/46 mm |
+| SKÅDIS board connection | exactly two printed hooks at X = −20/+20 mm, Z = 58 mm |
+| SKÅDIS lower features | two board-bearing supports; not connectors |
+| Multiboard board connection | two centred attachment holes at X = 0, Z = 11/61 mm |
+| Multiboard pitch | 50 mm vertically |
+| Multiboard board hardware | two external M4-compatible fasteners required |
+| Declared print bed | 256 × 256 mm |
+
+### Printable v2.5 files
+
+- `v2_5_connected_body_start_left.3mf` — one-piece ten-position body beginning
+  with a left opening.
+- `v2_5_connected_body_start_right.3mf` — one-piece reverse body beginning
+  with a right opening.
+- `v2_5_skadis_back_two_hook.3mf` — compact back with exactly two printed
+  SKÅDIS hooks and two lower bearing supports.
+- `v2_5_multiboard_back_two_point.3mf` — compact back with two centred
+  counterbored attachment points for external Multiboard hardware.
+- `v2_5_skadis_fit_coupon_two_hook.3mf` — lower-material two-hook fit coupon.
+- `v2_5_multiboard_fit_coupon_two_point_50mm.3mf` — lower-material two-hole
+  50 mm-pitch fit coupon.
+- `v2_5_three_slot_alternating_coupon.3mf` — short left/right/left spacing and
+  shaft-fit coupon using the final 21 mm pitch and pocket geometry.
+
+Every supplied v2.5 body, back and coupon validates as one closed manifold
+component with minimum Z = 0 and fits the declared 256 × 256 mm print bed.
+
+### v2.5 hardware
+
+Both mounting variants require:
+
+- Four body-to-back M4 screws. Their heads must fit the modelled
+  Ø8.2 × 4.2 mm body counterbores. Select a length that reaches the inserts
+  with the insert manufacturer's recommended thread engagement without
+  bottoming or protruding through the rear.
+- Four M4 heat-set inserts compatible with the modelled tapered pockets:
+  Ø5.9 mm entry, Ø5.4 mm tip and 6.2 mm depth. Confirm the actual insert
+  dimensions and printer compensation before installing all four.
+
+The Multiboard variant additionally requires:
+
+- Two external Multiboard-compatible M4 board fasteners. Their heads must fit
+  the Ø8.4 × 4.2 mm counterbores. Select hardware suited to the actual tile,
+  wall installation and load. These board fasteners are not printed or
+  supplied by the model.
+
+### Required v2.5 physical validation
+
+Do not treat the prototype as load-rated or install valuable rackets until all
+of these checks pass:
+
+1. Print the three-slot coupon and test the smallest and largest real racket
+   shafts. Confirm the 6.6 mm entries flex without cracking, the Ø8.8 mm
+   pockets retain the shafts and three representative rackets fit together at
+   21 mm pitch.
+2. Print the appropriate board-fit coupon. On a real board, confirm both
+   SKÅDIS hooks engage together or both Multiboard fasteners seat correctly.
+   Reject forcing, rocking, partial engagement or visible board deformation.
+3. Print the selected one-piece body and inspect every alternating tooth,
+   especially the 9.6 mm opposite ligament, for layer gaps, under-extrusion or
+   cracks. Use at least six perimeters so the critical ligaments contain
+   continuous extrusion paths.
+4. Install the four inserts, seat the centred key fully and tighten the four
+   body screws evenly. Mount the empty assembly and check the root, hooks,
+   fasteners, board and wall attachment.
+5. Add ten real rackets gradually from the root towards the tip. Leave the
+   intended ten-racket load in place for 24 hours. Reject cracking, board
+   rocking, insert movement, hook or fastener movement, or permanent tip set
+   greater than 1 mm.
+6. Only after the sustained test passes, perform a supervised gradual 3 kg
+   tip proof load. Stop at the first visible, audible or measured change. The
+   test must include the real board and its wall attachment.
+
+### v2.5 rendering and validation
+
+Run the dimensional contract from this project directory:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings \
+  -D 'render_mode="none"' \
+  -o /tmp/badminton_v2_5_dimensions.echo \
+  tests/prototypes/v2_5/test_dimensions.scad
+```
+
+Printable modes:
+
+- `body_start_left`
+- `body_start_right`
+- `skadis_back`
+- `multiboard_back`
+- `skadis_fit_coupon`
+- `multiboard_fit_coupon`
+- `spacing_coupon`
+
+Render a mode with:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings --backend Manifold \
+  -D 'render_mode="body_start_left"' \
+  -o files/prototypes/v2.5/v2_5_connected_body_start_left.3mf \
+  src/prototypes/v2_5_connected_zigzag.scad
+```
+
+Validate all seven 3MF files, one-component topology, closed/manifold edges,
+minimum Z, print-bed fit and all 66 protected v2.2-v2.4 assets:
+
+```sh
+python3 tests/prototypes/v2_5/validate_meshes.py \
+  files/prototypes/v2.5
+```
+
+Preview-only modes:
+
+- `preview_assembled_skadis`
+- `preview_assembled_multiboard`
+- `preview_zigzag_spine`
+- `preview_skadis_rear`
+- `preview_multiboard_rear`
+- `preview_print_orientation`
+
 ## v2.4 printable ten-position prototype — physical validation required
 
 v2.4 is the first printable full-length rotating-collar package. It provides
