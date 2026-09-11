@@ -1,4 +1,231 @@
-# Compact v2.2 badminton racket rack
+# Badminton racket wall hook
+
+## v2.3 rotating-collar prototype — not yet released
+
+**This is an experimental fit and mechanism package. Do not print or load a
+ten-collar body. No printable ten-collar 3MF or export mode is provided.**
+
+The v2.3 prototype tests true left-or-right access at every racket position.
+Each separate collar rotates 180 degrees inside a fixed bilateral body
+corridor. The collar's C opening faces the selected insertion side while its
+solid opposite arc bridges the body gap.
+
+The released v2.2 files remain unchanged. All v2.3 source, tests, meshes and
+previews are isolated under prototype paths:
+
+- Editable source:
+  `src/prototypes/v2_3_rotating_collar.scad`
+- Dimensional tests:
+  `tests/prototypes/v2_3/test_dimensions.scad`
+- Mesh validator:
+  `tests/prototypes/v2_3/validate_meshes.py`
+- Protected v2.2 checksums:
+  `tests/prototypes/v2_3/v2_2_release.sha256`
+- Printable prototype meshes:
+  `files/prototypes/v2.3/`
+- Prototype previews:
+  `previews/prototype-v2.3/`
+
+### Prototype geometry
+
+| Feature | v2.3 prototype |
+|---|---:|
+| SKÅDIS back | 72 × 72 × 8 mm |
+| SKÅDIS hooks | exactly two, X = −20/+20 mm, Z = 58 mm |
+| Multiboard back | 72 × 72 × 8 mm |
+| Multiboard positions | X = −25/+25 mm; Z = 11/61 mm |
+| Multiboard pitch | 50 × 50 mm |
+| Centred heel | 72 × 36 × 8 mm |
+| Arm section | 28 × 36 mm |
+| Mounted arm position | X = 0; global Z = 18..54 mm |
+| Positive key | 40 × 20 × 3 mm, centred at global Z = 36 mm |
+| Body fasteners | four M4 at X = ±27; global Z = 26/46 mm |
+| Root flare | 40 mm, tapering to 28 mm by Y = 10.5 mm |
+| Collar pitch | 21 mm |
+| Preview-only centres | Y = 23 + 21i mm, ten positions |
+| Preview-only projection | 223 mm |
+| Nominal shaft | 7.2 mm |
+| Collar bore | 9.0 mm |
+| Fixed bilateral corridor | 8.0 mm |
+| Collar barrel | 16.0 mm |
+| Top flange | 17.2 × 2.0 mm |
+| Body top recess | 17.6 × 2.2 mm |
+| Nominal axial movement | 0.2 mm |
+
+The body has rigid corridors on both sides. Those corridors intentionally
+separate the body into sections; the installed collars join and locate those
+sections. The structural coupon body therefore contains four closed components
+and the tolerance fixture contains eighteen closed components. The separate
+assembly cradles hold those loose components at their designed spacing while
+the collars are pressed through them.
+
+### Rotating collar operation
+
+Each collar has:
+
+- A 9.0 mm bore and a C throat.
+- A solid opposite arc that carries load across the body corridor.
+- A 17.2 mm top flange captured in the body recess.
+- A C-shaped lower snap lip with a 45-degree insertion chamfer and nominal
+  0.3 mm radial retaining shoulder.
+- One replaceable stop/detent tab travelling in a recessed 180-degree body
+  track.
+- A recessed top tool slot and direction arrow.
+- Fixed debossed `L` and `R` marks on the body.
+
+To assemble and operate one collar:
+
+1. Place every loose body section in its matching shallow cradle pocket.
+   For the matrix, match both half IDs at each station, such as `A1-S` and
+   `A1-N`. For the structural coupon, use the `ROOT`, `S2`, `S3` and `TIP`
+   pockets.
+2. Check that each 22 mm cradle through-hole is centred below its collar
+   cavity. The lower snap lip must pass into this hole without touching the
+   cradle.
+3. Align the collar throat with either fixed corridor.
+4. Press the collar down from the top until the C-shaped lower lip passes
+   through the cavity and its shoulder catches below the body.
+5. Confirm the top flange sits inside the 17.6 mm recess and the collar has
+   slight axial movement without lifting out.
+6. Use a small flat tool in the recessed slot. Rotate until the arrow points
+   to the required `L` or `R` mark and the collar reaches the hard stop and
+   endpoint detent.
+7. Insert the racket shaft from that side, through the 8.0 mm body corridor
+   and collar throat, until it seats in the 9.0 mm bore.
+8. Remove the shaft from the same selected side. Rotate the empty collar
+   exactly 180 degrees to change sides.
+9. After all three structural-coupon collars are installed, lift the assembled
+   four-section chain out of its cradle as one unit.
+10. To remove a collar, return the assembly to its cradle, work through the
+    hole from below, compress the open C lip evenly and push the collar
+    upwards. Do not pry against a fixed body web.
+
+Do not rotate a collar while it is carrying a racket. Do not force a collar
+that binds or a throat that will not accept the test shaft.
+
+The stop tab travels from 90 to 270 degrees in the fixed body, giving exactly
+180 degrees of throat travel. The track covers the complete moving-tab
+envelope and uses direct radial end faces as the hard stops. At both hard
+stops, the flexible collar detent and fixed pocket share the same calculated
+centre; nominal centre mismatch is 0.00 mm and nominal engagement is 0.18 mm.
+
+### Printable v2.3 prototype files
+
+- `v2_3_tolerance_matrix_fixture.3mf` — nine labelled socket tests covering
+  all cavity diameters.
+- `v2_3_tolerance_matrix_collars.3mf` — nine matched, labelled collars
+  covering all cavity/throat combinations.
+- `v2_3_tolerance_matrix_cradle.3mf` — one indexed carrier with eighteen
+  shallow half pockets and nine 22 mm snap-lip through-holes.
+- `v2_3_structural_coupon_body.3mf` — centred heel, interface, corrected root
+  and three bilateral collar positions at 21 mm pitch.
+- `v2_3_structural_coupon_collars.3mf` — three nominal 16.5 mm collars with
+  6.9, 7.1 and 7.3 mm throats.
+- `v2_3_structural_coupon_cradle.3mf` — one four-section carrier with three
+  22 mm through-holes; the installed coupon lifts out as one chain.
+- `v2_3_skadis_back_two_hook.3mf` — full 72 mm back with exactly two centred
+  SKÅDIS hooks.
+- `v2_3_multiboard_back_centred.3mf` — full 72 mm centred Multiboard back.
+- `v2_3_skadis_fit_coupon_two_hook.3mf` — lower-material two-hook fit coupon.
+- `v2_3_multiboard_fit_coupon_50x50.3mf` — lower-material 50 × 50 mm spacing
+  coupon.
+
+The collar build plates print flange-down. Each collar has a snap-off label
+tag joined to the solid arc so its cavity and throat combination remains
+identifiable. Both matrix socket halves carry their complete station and side
+ID, from `A1-S`/`A1-N` through `C3-S`/`C3-N`. The nearby matrix text also gives
+the cavity and throat dimensions, for example `B2 16.5/7.1`.
+
+### Required v2.3 test sequence
+
+Complete the tests in this order:
+
+1. **Tolerance matrix:** print the fixture, matched collars and tolerance
+   cradle. Seat all eighteen labelled halves in their indexed pockets before
+   installing a collar. Check every matched pair for insertion force, free
+   rotation, exact left and right alignment, detent engagement, axial play,
+   lip retention and release through the 22 mm hole below.
+2. **Shaft fit:** test the smallest and largest real racket shafts in all
+   three throat widths. Reject any combination that marks, pinches or releases
+   the shaft unintentionally.
+3. **Cycle test:** rotate each viable combination left-to-right at least
+   25 times while empty. Remove and reinstall representative collars at least
+   ten times. Inspect the C roots, snap lip and detent after every set.
+4. **Three-collar coupon:** print the body, three nominal collars and
+   structural cradle. Seat all four sections in the indexed pockets, install
+   the three collars through the cradle holes, then lift the connected chain
+   out. Confirm all three collars bridge the corridors and three rackets can
+   be inserted and removed independently from both sides.
+5. **Local load test:** load the three-collar coupon gradually while
+   observing collar rotation, lower-lip pull-through, flange lift, body-section
+   separation and creep. Stop at the first visible or audible change.
+6. **Connector fit:** test the full two-hook SKÅDIS coupon or the centred
+   Multiboard coupon on the real board. Confirm simultaneous engagement,
+   bearing-pad contact and no rocking.
+7. **Back/interface dry fit:** install the selected 72 mm back, heat-set
+   inserts and structural coupon while empty. Confirm key seating, screw-head
+   access and board clearance.
+8. Record the selected cavity/throat pair, material, layer orientation,
+   printer compensation and every failure before considering another
+   prototype revision.
+
+The short structural coupon does not reproduce the approximately 6.6 N·m
+moment of a 3 kg load at the 223 mm concept tip. Passing the coupon tests does
+not validate a ten-racket rack. A later full-length prototype needs a separate,
+supervised proof-load plan that covers collar creep, interface inserts, the
+two SKÅDIS hooks or Multiboard hardware, the board and its wall mounting.
+
+### Prototype rendering and validation
+
+Printable modes:
+
+- `tolerance_matrix_fixture`
+- `tolerance_matrix_collars`
+- `tolerance_matrix_cradle`
+- `structural_coupon_body`
+- `structural_coupon_collars`
+- `structural_coupon_cradle`
+- `skadis_back`
+- `multiboard_back`
+- `skadis_fit_coupon`
+- `multiboard_fit_coupon`
+
+Preview-only modes:
+
+- `preview_tolerance_matrix`
+- `preview_structural_coupon`
+- `preview_stop_poses`
+- `preview_collar_detail`
+- `preview_back_pair`
+- `preview_concept_skadis`
+- `preview_concept_multiboard`
+
+There is deliberately no printable full-body mode.
+
+Run the dimensional tests:
+
+```sh
+TERM=dumb NO_COLOR=1 openscad --hardwarnings \
+  -D 'render_mode="none"' \
+  -o /tmp/badminton_v2_3_dimensions.echo \
+  tests/prototypes/v2_3/test_dimensions.scad
+```
+
+Validate generated prototype meshes:
+
+```sh
+python3 tests/prototypes/v2_3/validate_meshes.py \
+  files/prototypes/v2.3
+```
+
+Verify the protected v2.2 3MF and PNG release files:
+
+```sh
+shasum -a 256 -c \
+  tests/prototypes/v2_3/v2_2_release.sha256
+```
+
+## Released v2.2 rack
 
 The v2.2 rack stores ten badminton rackets on one centred line and attaches to
 either IKEA SKÅDIS or Multiboard through an interchangeable mounting back. It
