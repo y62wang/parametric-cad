@@ -1,4 +1,4 @@
-// Compact v2.1 badminton racket rack for IKEA SKÅDIS and Multiboard.
+// Compact v2.2 badminton racket rack for IKEA SKÅDIS and Multiboard.
 //
 // All printable geometry in this file is modelled independently. The racket
 // body and mounting backs are separate parts. A positive key carries interface
@@ -14,11 +14,14 @@ render_mode = "body_alternating";
 // assembled_multiboard_v2, assembled_multiboard_v2_reverse,
 // assembled_multiboard_right, assembled_multiboard_left,
 // skadis_coupon_v2, multiboard_coupon_v2,
+// racket_spacing_coupon_v2_2,
 // body_print_preview, skadis_back_rear_preview,
-// multiboard_back_preview, skadis_engagement_preview,
+// multiboard_board_side_preview, multiboard_interface_side_preview,
+// skadis_engagement_preview,
+// racket_spacing_coupon_preview,
 // compatibility aliases: skadis_back, multiboard_back, assembled_skadis,
-// assembled_multiboard, skadis_coupon, multiboard_coupon, alignment_preview,
-// none
+// assembled_multiboard, skadis_coupon, multiboard_coupon,
+// racket_spacing_coupon, multiboard_back_preview, alignment_preview, none
 
 /* [Racket fit] */
 entry_pattern = "alternating"; // "alternating", "left" or "right"
@@ -27,36 +30,36 @@ num_slots = 10;
 shaft_d = 7.2;
 pocket_d = 8.8;
 entry_gap = 6.6;
-slot_pitch = 24.5;
+slot_pitch = 20;
 
-/* [Universal v2 body] */
-wall_t = 8.5;
+/* [Universal v2.2 body] */
+wall_t = 6.6;
 arm_h = 28;
-arm_z0 = 36;
+arm_z0 = 32;
 arm_corner_r = 3;
 arm_start_y = 6;
-first_slot_y = 17.5;
+first_slot_y = 17;
 tip_margin = 4;
-heel_w = 120;
-heel_h = 64;
+heel_w = 92;
+heel_h = 60;
 heel_t = 8;
 heel_corner_r = 4;
-root_flare_w = 76;
-root_transition_end_y = 12.5;
+root_flare_w = 60;
+root_transition_end_y = 12;
 gusset_t = 6;
-gusset_end_y = 12.5;
+gusset_end_y = 12;
 
 /* [Body-to-back interface] */
-key_w = 72;
-key_h = 34;
+key_w = 48;
+key_h = 30;
 key_depth = 3;
 key_corner_r = 4;
 key_z0 = 17;
 key_clearance_per_side = 0.25;
 key_depth_clearance = 0.35;
 body_to_back_z = 2;
-body_bolt_x = [-42, 42];
-body_bolt_z = [18, 49];
+body_bolt_x = [-30, 30];
+body_bolt_z = [18, 45];
 m4_clearance_d = 4.5;
 body_counterbore_d = 8.2;
 body_counterbore_depth = 4.2;
@@ -64,21 +67,21 @@ insert_entry_d = 5.9;
 insert_tip_d = 5.4;
 insert_depth = 6.2;
 
-/* [Compact mounting backs] */
+/* [Compact v2.2 mounting backs] */
 back_t = 8;
 back_corner_r = 4;
-skadis_back_w = 140;
+skadis_back_w = 100;
 skadis_back_h = 72;
-multiboard_back_w = 130;
+multiboard_back_w = 100;
 multiboard_back_h = 72;
 
-/* [SKÅDIS v2 connection] */
+/* [SKÅDIS v2.2 connection] */
 skadis_slot_w = 5;
 skadis_slot_h = 15;
 skadis_board_t = 3;
 skadis_board_clearance = 0.4;
 skadis_standoff = 0.8;
-skadis_hook_x = [-60, -20, 20, 60];
+skadis_hook_x = [-40, 0, 40];
 skadis_hook_z = 58;
 skadis_hook_pitch = 40;
 skadis_hook_w = 4.2;
@@ -90,15 +93,15 @@ skadis_tongue_neck_overlap = 0.2;
 skadis_upper_pad_x = skadis_hook_x;
 skadis_upper_pad_w = 12;
 skadis_upper_pad_h = 14;
-skadis_lower_pad_x = [-45, 0, 45];
+skadis_lower_pad_x = [-30, 0, 30];
 skadis_lower_pad_z = 10;
 skadis_lower_pad_w = 24;
 skadis_lower_pad_h = 14;
 skadis_lower_locator_x = [];
 
-/* [Multiboard v2 connection] */
+/* [Multiboard v2.2 connection] */
 multiboard_cell_pitch = 25;
-multiboard_mount_x = [-50, 0, 50];
+multiboard_mount_x = [-25, 25];
 multiboard_mount_z = [11, 61];
 multiboard_mount_pitch_x = 50;
 multiboard_mount_pitch_z = 50;
@@ -118,6 +121,11 @@ multiboard_coupon_h = multiboard_back_h;
 multiboard_coupon_t = 3;
 multiboard_coupon_mount_x = multiboard_mount_x;
 multiboard_coupon_mount_z = multiboard_mount_z;
+
+/* [Racket spacing coupon] */
+spacing_coupon_num_slots = 3;
+spacing_coupon_pitch = slot_pitch;
+spacing_coupon_end_margin = 4;
 
 /* [Rendering quality] */
 round_fn = 40;
@@ -146,6 +154,28 @@ body_print_nominal_coplanar_area =
     body_print_arm_contact_width *
         body_print_nominal_arm_contact_length +
     body_print_heel_contact_width * heel_t;
+spacing_coupon_first_y = pocket_r + spacing_coupon_end_margin;
+spacing_coupon_centres = [
+    for (i = [0 : spacing_coupon_num_slots - 1])
+        [0, spacing_coupon_first_y + i * spacing_coupon_pitch]
+];
+spacing_coupon_last_y =
+    spacing_coupon_centres[len(spacing_coupon_centres) - 1][1];
+spacing_coupon_length =
+    spacing_coupon_last_y + pocket_r + spacing_coupon_end_margin;
+spacing_coupon_pocket_d = pocket_d;
+spacing_coupon_entry_gap = entry_gap;
+spacing_coupon_arm_w = arm_w;
+spacing_coupon_arm_h = arm_h;
+spacing_coupon_print_support_gap = 0;
+spacing_coupon_opening_records = [
+    for (i = [0 : spacing_coupon_num_slots - 1])
+        [
+            spacing_coupon_centres[i][0],
+            spacing_coupon_centres[i][1],
+            i % 2 == 0 ? "left" : "right"
+        ]
+];
 skadis_hook_tongue_z0 =
     skadis_hook_z - skadis_hook_tongue_h / 2;
 skadis_hook_neck_z0 =
@@ -273,6 +303,12 @@ assert(
         " mm"
     )
 );
+assert(
+    spacing_coupon_num_slots == 3 &&
+    spacing_coupon_pitch == slot_pitch &&
+    spacing_coupon_print_support_gap == 0,
+    "The three-slot racket spacing coupon must match the support-free body"
+);
 
 echo(str("RENDER_MODE: ", render_mode));
 echo(str(
@@ -283,7 +319,7 @@ echo(str(
     ", reverse ", active_reverse_alternating
 ));
 echo(str(
-    "BODY_V2_1: ", num_slots,
+    "BODY_V2_2: ", num_slots,
     " slots at ", slot_pitch,
     " pitch; projection ", body_tip_y,
     "; print axis ", body_side_print_length,
@@ -330,6 +366,10 @@ echo(
                 [x, z]
     ]
 );
+echo(
+    "RACKET_SPACING_COUPON_CENTRES_X_Y",
+    spacing_coupon_centres
+);
 
 // Rounded rectangle in X/Z, extruded along positive Y.
 module rounded_prism_y(
@@ -354,7 +394,12 @@ module rounded_prism_y(
     }
 }
 
-module racket_slot_void(opening_record) {
+module racket_slot_void(
+    opening_record,
+    z0 = arm_z0,
+    height = arm_h,
+    width = arm_w
+) {
     centre_x = opening_record[0];
     centre_y = opening_record[1];
     side = opening_record[2];
@@ -364,10 +409,10 @@ module racket_slot_void(opening_record) {
         str("Each pocket needs one assigned side; got ", side)
     );
 
-    translate([centre_x, centre_y, arm_z0 - 0.2])
+    translate([centre_x, centre_y, z0 - 0.2])
         cylinder(
             r = pocket_r,
-            h = arm_h + 0.4,
+            h = height + 0.4,
             $fn = round_fn
         );
 
@@ -375,23 +420,23 @@ module racket_slot_void(opening_record) {
         translate([
             centre_x,
             centre_y - entry_gap / 2,
-            arm_z0 - 0.2
+            z0 - 0.2
         ])
             cube([
-                arm_w / 2 - centre_x + 0.3,
+                width / 2 - centre_x + 0.3,
                 entry_gap,
-                arm_h + 0.4
+                height + 0.4
             ]);
     else
         translate([
-            -arm_w / 2 - 0.3,
+            -width / 2 - 0.3,
             centre_y - entry_gap / 2,
-            arm_z0 - 0.2
+            z0 - 0.2
         ])
             cube([
-                centre_x + arm_w / 2 + 0.3,
+                centre_x + width / 2 + 0.3,
                 entry_gap,
-                arm_h + 0.4
+                height + 0.4
             ]);
 }
 
@@ -857,6 +902,34 @@ module multiboard_spacing_coupon_v2_print() {
             multiboard_spacing_coupon_v2();
 }
 
+// Three real rackets can be trialled at the final 20 mm spacing before the
+// full body is printed. The coupon reuses the body's arm, pocket and entry
+// dimensions and alternates left/right/left insertion.
+module racket_spacing_coupon_v2_2() {
+    difference() {
+        rounded_prism_y(
+            spacing_coupon_arm_w,
+            spacing_coupon_length,
+            spacing_coupon_arm_h,
+            arm_corner_r,
+            0,
+            0
+        );
+
+        for (opening_record = spacing_coupon_opening_records)
+            racket_slot_void(
+                opening_record,
+                0,
+                spacing_coupon_arm_h,
+                spacing_coupon_arm_w
+            );
+    }
+}
+
+module racket_spacing_coupon_v2_2_print() {
+    racket_spacing_coupon_v2_2();
+}
+
 module assembled_skadis_v2(
     pattern = "alternating",
     reverse = false
@@ -897,15 +970,32 @@ module skadis_back_rear_preview() {
         skadis_back_v2();
 }
 
-module multiboard_back_preview() {
+// These two preview modes intentionally use the same printable back. Their
+// camera directions distinguish the board side, where only the four actual
+// Multiboard mounting holes are visible, from the body-facing interface side.
+module multiboard_board_side_preview() {
     color([0.30, 0.32, 0.34])
         multiboard_back_v2();
+}
+
+module multiboard_interface_side_preview() {
+    color([0.30, 0.32, 0.34])
+        multiboard_back_v2();
+}
+
+module multiboard_back_preview() {
+    multiboard_board_side_preview();
+}
+
+module racket_spacing_coupon_preview() {
+    color([0.88, 0.58, 0.10])
+        racket_spacing_coupon_v2_2();
 }
 
 // Preview-only SKÅDIS board patch. Slots are shown after the back has lowered
 // by the 8 mm latch travel, so the downward tongues remain behind the board.
 module skadis_board_preview() {
-    preview_board_w = 152;
+    preview_board_w = skadis_back_w + 20;
     preview_board_h = 28;
     preview_board_z0 =
         skadis_engaged_slot_z - preview_board_h / 2;
@@ -935,11 +1025,107 @@ module skadis_board_preview() {
     }
 }
 
+// Preview-only frames mark the nominal slot edges on the rear board face. The
+// orange necks remain inside these frames while each longer tongue extends
+// below the lower edge after the back is lowered.
+module skadis_slot_frame_preview(x) {
+    frame_w = 0.8;
+    frame_depth = 0.35;
+    board_front_y = -back_t - skadis_standoff;
+    board_rear_y = board_front_y - skadis_board_t;
+    frame_y0 = board_rear_y - frame_depth - 0.05;
+    slot_z0 = skadis_engaged_slot_z - skadis_slot_h / 2;
+
+    translate([
+        x - skadis_slot_w / 2 - frame_w,
+        frame_y0,
+        slot_z0 - frame_w
+    ])
+        cube([
+            frame_w,
+            frame_depth,
+            skadis_slot_h + 2 * frame_w
+        ]);
+
+    translate([
+        x + skadis_slot_w / 2,
+        frame_y0,
+        slot_z0 - frame_w
+    ])
+        cube([
+            frame_w,
+            frame_depth,
+            skadis_slot_h + 2 * frame_w
+        ]);
+
+    for (z = [slot_z0 - frame_w, slot_z0 + skadis_slot_h])
+        translate([
+            x - skadis_slot_w / 2 - frame_w,
+            frame_y0,
+            z
+        ])
+            cube([
+                skadis_slot_w + 2 * frame_w,
+                frame_depth,
+                frame_w
+            ]);
+}
+
+module skadis_neck_highlight_preview(x, z, plate_t) {
+    board_front_y = -plate_t - skadis_standoff;
+    board_rear_y = board_front_y - skadis_board_t;
+    tongue_front_y =
+        board_rear_y - skadis_board_clearance;
+    tongue_z0 = z - skadis_hook_tongue_h / 2;
+    neck_z0 =
+        tongue_z0 +
+        skadis_hook_tongue_h -
+        skadis_hook_neck_h;
+    neck_depth = -plate_t + 0.2 - tongue_front_y;
+
+    translate([
+        x - skadis_hook_w / 2,
+        tongue_front_y - 0.02,
+        neck_z0
+    ])
+        cube([
+            skadis_hook_w,
+            neck_depth + 0.04,
+            skadis_hook_neck_h
+        ]);
+}
+
 module skadis_engagement_preview() {
-    color([0.88, 0.58, 0.10])
-        skadis_back_v2();
-    color([0.82, 0.82, 0.78, 1])
+    // Separate preview-only colours make the three unchanged load hooks
+    // readable through the transparent board from a rear oblique camera.
+    color([0.30, 0.32, 0.34, 1]) {
+        modular_back_core(skadis_back_w, skadis_back_h);
+        for (x = skadis_lower_pad_x)
+            skadis_lower_compression_pad(
+                x,
+                skadis_lower_pad_z,
+                back_t
+            );
+    }
+
+    for (x = skadis_hook_x)
+        color([0.95, 0.42, 0.08, 1])
+            skadis_load_hook(x, skadis_hook_z, back_t);
+
+    for (x = skadis_hook_x)
+        color([1.00, 0.82, 0.12, 1])
+            skadis_neck_highlight_preview(
+                x,
+                skadis_hook_z,
+                back_t
+            );
+
+    color([0.82, 0.84, 0.80, 0.20])
         skadis_board_preview();
+
+    for (x = skadis_hook_x)
+        color([0.92, 0.92, 0.88, 1])
+            skadis_slot_frame_preview(x);
 }
 
 if (render_mode == "body")
@@ -1001,17 +1187,30 @@ else if (
     render_mode == "multiboard_coupon"
 )
     multiboard_spacing_coupon_v2_print();
+else if (
+    render_mode == "racket_spacing_coupon_v2_2" ||
+    render_mode == "racket_spacing_coupon"
+)
+    racket_spacing_coupon_v2_2_print();
 else if (render_mode == "body_print_preview")
     body_print_orientation_preview();
 else if (render_mode == "skadis_back_rear_preview")
     skadis_back_rear_preview();
-else if (render_mode == "multiboard_back_preview")
-    multiboard_back_preview();
+else if (
+    render_mode == "multiboard_board_side_preview" ||
+    render_mode == "multiboard_back_preview"
+)
+    multiboard_board_side_preview();
+else if (render_mode == "multiboard_interface_side_preview")
+    multiboard_interface_side_preview();
 else if (render_mode == "skadis_engagement_preview")
     skadis_engagement_preview();
+else if (render_mode == "racket_spacing_coupon_preview")
+    racket_spacing_coupon_preview();
 else if (render_mode == "alignment_preview")
     // Compatibility alias: printable alternating body only, with no guides.
-    universal_body("alternating", false);
+    color([0.88, 0.58, 0.10])
+        universal_body("alternating", false);
 else if (render_mode == "none") {
     // Test mode deliberately emits no source geometry.
 }

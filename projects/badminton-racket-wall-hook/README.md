@@ -1,160 +1,226 @@
-# Compact v2.1 badminton racket rack
+# Compact v2.2 badminton racket rack
 
-The recommended v2.1 design stores ten badminton rackets on one centred line
-and uses a compact interchangeable back for IKEA SKÅDIS or Multiboard. Its
-default entry sequence is:
+The v2.2 rack stores ten badminton rackets on one centred line and attaches to
+either IKEA SKÅDIS or Multiboard through an interchangeable mounting back. It
+is shorter and narrower than v2.1 while retaining the reviewed 28 mm arm
+height, 8 mm heel and 8 mm mounting-back thickness.
+
+The default body alternates its insertion sides:
 
 `left, right, left, right, left, right, left, right, left, right`
 
-This gives rack-level access from both sides. Each individual pocket still has
-one assigned insertion side. Cutting both sides of every pocket would sever the
-one-piece arm into separate sections; true per-pocket bilateral access needs
-moving or removable gates. The robust one-piece choices supplied here are
-all-left, all-right or alternating entry.
+All ten pocket centres remain at X = 0, so the seated shafts are centred and
+aligned. Each pocket has one assigned entry side. Opening both sides of every
+pocket would disconnect the one-piece arm; true two-sided access to each
+individual pocket requires moving or removable gates.
 
-All v2 geometry is independently modelled from the dimensions in this source.
+## What changed from v2.1
 
-## Recommended v2 files
+| Feature | v2.1 | v2.2 | Change |
+|---|---:|---:|---:|
+| Racket pitch | 24.5 mm | 20 mm | −18.4% |
+| Projection | 246.4 mm | 205.4 mm | −41 mm |
+| Longest body print axis | 249.4 mm | 208.4 mm | −41 mm |
+| Arm width | 25.8 mm | 22 mm | −14.7% |
+| Body heel width | 120 mm | 92 mm | −23.3% |
+| SKÅDIS back width | 140 mm | 100 mm | −28.6% |
+| Multiboard back width | 130 mm | 100 mm | −23.1% |
 
-- `files/badminton_universal_body_10_alternating.3mf` — default alternating
-  body, beginning on the left.
-- `files/badminton_universal_body_10_alternating_reverse.3mf` — mirrored
-  alternating sequence, beginning on the right.
-- `files/badminton_universal_body_10_all_left_v2_1.3mf` — all-left v2.1
-  body.
-- `files/badminton_universal_body_10_all_right_v2_1.3mf` — all-right v2.1
-  body.
-- `files/badminton_skadis_back_v2.3mf` — compact four-hook SKÅDIS back.
-- `files/badminton_multiboard_back_v2.3mf` — compact six-position Multiboard
-  back for official locking hardware.
-- `files/skadis_fit_coupon_v2.3mf` — full-width four-hook SKÅDIS fit coupon.
-- `files/multiboard_spacing_coupon_v2.3mf` — full 50 × 50 mm Multiboard
-  spacing coupon.
-- `src/badminton_hook.scad` — editable source for all v2 parts and comparison
-  variants.
-- `tests/test_dimensions.scad` — dimensional, spacing and keep-out checks.
+The 20 mm pitch is intentionally compact and must be checked with real
+rackets. Print the three-slot spacing coupon before committing to the full
+body. Grip shape, cone size, overgrip thickness and frame geometry vary between
+rackets even when the shaft itself fits the 8.8 mm pocket.
 
-The clean v2.1 previews are in `previews/`. Earlier previews are retained in
-`previews/legacy-v1/` and `previews/legacy-v2.0/`. The superseded v2.0 3MF
-exports are retained in `files/archive/v2.0/`.
+## Recommended v2.2 files
 
-The v2.1 previews include both sides of the alternating body, the body in its
-support-free print orientation, rear views of both mounting backs and a
-preview-only SKÅDIS board engagement view.
+- `files/badminton_universal_body_10_alternating.3mf` — alternating body,
+  beginning on the left.
+- `files/badminton_universal_body_10_alternating_reverse.3mf` — alternating
+  body, beginning on the right.
+- `files/badminton_universal_body_10_all_left_v2_2.3mf` — all-left body.
+- `files/badminton_universal_body_10_all_right_v2_2.3mf` — all-right body.
+- `files/badminton_skadis_back_v2.3mf` — 100 mm SKÅDIS back with three
+  gravity-latching hooks.
+- `files/badminton_multiboard_back_v2.3mf` — 100 mm Multiboard back with four
+  mounting positions.
+- `files/skadis_fit_coupon_v2.3mf` — full-pattern SKÅDIS connector coupon.
+- `files/multiboard_spacing_coupon_v2.3mf` — full-pattern Multiboard spacing
+  coupon.
+- `files/badminton_racket_spacing_coupon_20mm_v2_2.3mf` — three-slot racket
+  spacing coupon using the final body geometry.
+- `src/badminton_hook.scad` — editable parametric source.
+- `tests/test_dimensions.scad` — dimensional, pattern and clearance checks.
 
-## Legacy files
+The top-level `files/` directory contains only these nine recommended v2.2
+exports.
 
-The earlier files are preserved and deprecated:
+## Archived files and incompatibility warning
 
-- `files/badminton_hook.3mf` — original eight-slot direct-to-wall rack.
-- `files/badminton_universal_body_10.3mf`
-- `files/badminton_universal_body_10_left.3mf`
-- `files/badminton_universal_body_10_right.3mf`
-- `files/badminton_skadis_back.3mf`
-- `files/badminton_multiboard_back.3mf`
-- `files/skadis_fit_coupon.3mf`
-- `files/multiboard_spacing_coupon.3mf`
+**Do not mix any archived body, mounting back or fit coupon with current v2.2
+parts.** The heel, positive key, M4 positions, mounting-back dimensions and
+connector patterns changed between revisions. Archived files are retained only
+for reprinting a complete matching historical assembly or for reference.
 
-Do not mix a v1 body and v2 back. Their heel, key, fastener and connector
-dimensions differ.
+`files/archive/v1/` contains the eight incompatible early exports:
 
-## Main v2 dimensions
+- `badminton_hook.3mf`
+- `badminton_universal_body_10.3mf`
+- `badminton_universal_body_10_left.3mf`
+- `badminton_universal_body_10_right.3mf`
+- `badminton_skadis_back.3mf`
+- `badminton_multiboard_back.3mf`
+- `skadis_fit_coupon.3mf`
+- `multiboard_spacing_coupon.3mf`
+
+`files/archive/v2.0/` remains unchanged and contains:
+
+- `badminton_universal_body_10_alternating.3mf`
+- `badminton_universal_body_10_alternating_reverse.3mf`
+- `badminton_skadis_back_v2.3mf`
+- `badminton_multiboard_back_v2.3mf`
+- `skadis_fit_coupon_v2.3mf`
+- `multiboard_spacing_coupon_v2.3mf`
+
+Superseded v2.1 previews and explicitly v2.1-named all-left/all-right exports
+remain in Git history rather than another archive.
+
+## Preview files
+
+Current v2.2 previews are stored directly in `previews/`:
+
+- `v2_2_alternating_left_side.png`
+- `v2_2_alternating_right_side.png`
+- `v2_2_assembled_skadis.png`
+- `v2_2_assembled_multiboard.png`
+- `v2_2_body_print_orientation.png`
+- `v2_2_skadis_back_rear.png`
+- `v2_2_skadis_engagement.png`
+- `v2_2_multiboard_board_side.png`
+- `v2_2_multiboard_interface_side.png`
+- `v2_2_racket_spacing_coupon.png`
+
+The Multiboard board-side preview shows exactly the four actual board mounting
+positions. The separately labelled body-facing interface preview also shows
+the four blind heat-set insert openings and positive-key recess; those features
+are not additional Multiboard mounting positions.
+
+The SKÅDIS engagement preview uses a transparent board, outlined slot edges and
+a rear oblique view. All three orange tongues extend below their slot edges
+after lowering, while the highlighted neck sections remain inside the slots.
+
+The `previews/legacy-v1/` and `previews/legacy-v2.0/` directories remain
+unchanged.
+
+## Main dimensions
 
 | Feature | Nominal dimension |
 |---|---:|
 | Racket capacity | 10 |
-| Pocket centres | X = 0; Y = 17.5 + i × 24.5 mm |
-| Racket pitch | 24.5 mm |
+| Pocket centres | X = 0; Y = 17 + i × 20 mm |
+| First/last pocket centre | Y = 17/197 mm |
 | Nominal shaft diameter | 7.2 mm |
 | Pocket diameter | 8.8 mm |
 | Snap opening | 6.6 mm |
-| Arm section | 25.8 × 28 mm |
-| Arm position when mounted | Z = 36..64 mm |
-| Body heel | 120 × 64 × 8 mm |
-| Projection | 246.4 mm |
-| Longest body print axis | 249.4 mm |
-| Actual Z=0 contact area | approximately 4,804 mm² |
-| Positive interface key | 72 × 34 × 3 mm |
-| SKÅDIS back | 140 × 72 × 8 mm |
-| Multiboard back | 130 × 72 × 8 mm |
+| Opposite-side ligament | 6.6 mm |
+| Arm section | 22 × 28 mm |
+| Arm position when mounted | Z = 32..60 mm |
+| Body heel | 92 × 60 × 8 mm |
+| Root flare | 60 mm |
+| Projection | 205.4 mm |
+| Longest body print axis | 208.4 mm |
+| Nominal coplanar print contact | approximately 3,814 mm² |
+| Positive interface key | 48 × 30 × 3 mm |
+| SKÅDIS back | 100 × 72 × 8 mm |
+| Multiboard back | 100 × 72 × 8 mm |
 
-The body narrowly fits a nominal 256 mm bed. Check purge lines, brim width and
-machine exclusion zones. Do not scale the model because that changes the
-pockets, key and fastener positions.
+The root transition and gussets end at Y = 12 mm, leaving 0.6 mm before the
+first pocket. Do not reduce the arm, heel, root flare or back thickness without
+reassessing the load path.
 
-## Alternating entry options
+## Entry options
 
 The source parameter `entry_pattern` accepts:
 
 - `"alternating"` — five left and five right openings.
-- `"left"` — all ten openings on the left for comparison.
-- `"right"` — all ten openings on the right for comparison.
+- `"left"` — all ten openings on the left.
+- `"right"` — all ten openings on the right.
 
 Set `reverse_alternating = true` to begin the alternating sequence on the
-right. `"both"` is deliberately rejected because a full-width opening at every
-pocket would disconnect the arm. Per-pocket insertion from either side needs a
-moving or removable gate architecture.
-
-Every variant uses the same ten pocket coordinates, so all seated shafts remain
-centred and aligned.
+right. Every option uses the same ten pocket coordinates.
 
 ## Body-to-back interface
 
-The 72 × 34 × 3 mm positive key carries interface shear. Four M4 screws at
-X = ±42 mm and Z = 18/49 mm retain the body. Each back has four tapered blind
-pockets for nominal 5.7 × 6 mm M4 heat-set inserts.
+The 48 × 30 × 3 mm positive key carries interface shear. Four M4 screws at
+X = ±30 mm and Z = 18/45 mm retain the body. Each mounting back has tapered
+blind pockets for nominal 5.7 × 6 mm M4 heat-set inserts.
 
 Starting hardware:
 
 - Four M4 × 10 socket-head screws.
 - Four nominal 5.7 × 6 mm M4 heat-set inserts.
 
-Hardware dimensions vary. Measure the purchased inserts and screw heads, then
-adjust `insert_entry_d`, `insert_tip_d`, `insert_depth`,
-`body_counterbore_d` or screw length before printing the full parts.
+The reviewed geometry leaves:
 
-Install the inserts from the front face of the back. Fully seat the positive
-key before tightening the four screws evenly.
+- 11.9 mm from each outer body counterbore to the heel side.
+- 13.9 mm and 10.9 mm below and above the body counterbores.
+- 2.8 mm between the insert cavities and the key recess.
+- At least approximately 3.15 mm between a Multiboard counterbore and the
+  nearest insert cavity.
+- 3.55 mm between the lower Multiboard counterbores and key recess.
 
-## Compact SKÅDIS v2 back
+Hardware dimensions vary. Measure the purchased inserts and screw heads before
+printing the complete assembly. Install inserts from the front face of the
+mounting back and fully seat the key before tightening the screws evenly.
 
-The SKÅDIS back has:
+## SKÅDIS mounting back
 
-- Four independent gravity-latching hooks at X = −60, −20, 20 and 60 mm.
-- 40 mm aligned pitch and a full 120 mm hook span.
-- One hook row at approximately Z = 58 mm.
-- 4.2 mm hook width for nominal 5 mm slots.
+The 100 × 72 × 8 mm SKÅDIS back has:
+
+- Three unchanged gravity-latching hook profiles at X = −40, 0 and 40 mm.
+- 40 mm hook pitch over an 80 mm span.
+- One hook row at Z = 58 mm.
+- A 4.2 mm hook width for nominal 5 mm slots.
 - A 12 mm downward tongue, 4 mm neck and chamfered insertion edge.
-- Four upper bearing pads and three lower compression pads near Z = 10 mm.
-- No rigid lower connector row.
+- Three aligned upper bearing pads.
+- Three lower compression pads at X = −30, 0 and 30 mm near Z = 10 mm.
 
-The default source models a nominal 3.0 mm board with 0.4 mm running clearance.
-Measure the actual board and adjust `skadis_board_t` or
-`skadis_board_clearance` if required.
+The outer hooks retain 7.9 mm of plate edge material. The outer upper pads
+retain 4 mm. Do not narrow the back or hook profile.
 
-Print `skadis_fit_coupon_v2.3mf` first. It reproduces all four hooks, the full
-120 mm accumulated span, standoff and lower pads. Push all four chamfered
-tongues through one aligned slot row, bring the coupon against the board, then
-lower it so the necks seat and the downward tongues remain behind the board.
-Do not force it. Cycle the coupon at least 20 times and inspect the slots and
-hooks before printing the complete back.
+The source models a nominal 3.0 mm board with 0.4 mm running clearance. Print
+`skadis_fit_coupon_v2.3mf` first. Insert all three tongues through one aligned
+slot row, bring the coupon against the board and lower it until all three necks
+seat. Do not force the coupon. Actual SKÅDIS board thickness and slot
+tolerances must be checked physically.
 
-## Compact Multiboard v2 back
+## Multiboard mounting back
 
-Multiboard uses a 25 mm base grid. The v2 back uses every second position in
-both directions:
+The 100 × 72 × 8 mm Multiboard back uses four positions:
 
-- X = −50, 0 and 50 mm.
+- X = −25 and 25 mm.
 - Z = 11 and 61 mm.
-- Six M4 clearance and counterbored positions in a 50 × 50 mm pattern.
+- 50 × 50 mm centre spacing.
 
-The model does not include copied or improvised friction pegs. Use official
-locking or Small Thread Multipoint hardware suited to the installed tile and
-load. Fit all Multiboard hardware before attaching the racket body because the
-body covers the mounting area.
+Use official locking or Small Thread Multipoint hardware suited to the
+installed tile and load. The model does not include copied friction pegs.
+Print `multiboard_spacing_coupon_v2.3mf` to confirm the hole spacing and
+selected hardware before printing the full back.
 
-Use `multiboard_spacing_coupon_v2.3mf` to verify all six positions against the
-actual board and selected hardware.
+## Three-slot racket spacing coupon
+
+`badminton_racket_spacing_coupon_20mm_v2_2.3mf` is a support-free,
+56.8 mm-long section with three centred pockets. It uses:
+
+- The exact 20 mm body pitch.
+- The exact 8.8 mm pocket diameter.
+- The exact 6.6 mm entry opening.
+- The exact 22 × 28 mm arm section.
+- Left/right/left insertion.
+
+Fit three representative rackets at the same time. Check that the shafts seat
+without excessive force and that grips, cones and frames do not touch in the
+intended hanging orientation. Test the largest or most heavily overgripped
+rackets in the collection.
 
 ## Print orientation and settings
 
@@ -166,60 +232,62 @@ Suggested starting settings for load-bearing parts:
 - 35–45% cubic or gyroid infill.
 - Dry filament and calibrated extrusion.
 
-The body export is inverted relative to its mounted orientation. The broad top
-of the 64 mm heel and the broad top of the long arm are coplanar at Z=0. This
-provides approximately 4,804 mm² of first-layer contact over the heel and
-nearly the full 246 mm arm length, with no 4 mm suspended plane. The supplied
-body prints support-free. Verify the 249.4 mm footprint and consider a brim if
-your machine has weak bed adhesion.
+The body export is inverted relative to its mounted orientation. The heel and
+arm tops are both at Z = 60 mm in the assembled model, so inversion places
+both broad surfaces on the build plate. The supplied body is support-free and
+has a 208.4 mm longest print axis.
 
-Print the SKÅDIS back and coupon on their long edge so each hook profile lies
-in the layer plane. Use a brim and inspect the hook starts in the slicer.
-Print the Multiboard back and coupon flat.
+Print the SKÅDIS back and connector coupon on their long edge so the hook
+profiles lie in the layer plane. Use a brim if needed and inspect the hook
+starts in the slicer. Print the Multiboard back, Multiboard coupon and racket
+spacing coupon flat.
 
-## Fit and load workflow
+## Physical test workflow
 
-1. Print the relevant fit coupon.
-2. Test every coupon connector together on the actual board.
-3. Confirm the coupon inserts, lowers, locks and removes without forcing.
+1. Print and test the three-slot racket spacing coupon with real rackets.
+2. Print the connector coupon for the chosen board.
+3. Confirm every connector engages together without forcing or rocking.
 4. Print the selected back and install all board hardware.
-5. Install the four body-interface inserts and dry-fit the key and screws.
-6. Mount the empty assembly and check for rocking, lift-off, board flex,
-   insert movement or cracking.
-7. Test two adjacent real rackets inserted from opposite sides.
-8. Increase a final-slot proof load through 1 kg, 2 kg and 3 kg while
-   supervising the assembly. A 3 kg end load produces roughly 7.2 N·m.
-9. Remove the load immediately if anything moves or creaks. Inspect again
-   after a 24-hour intended-load test.
+5. Install the body-interface inserts and dry-fit the key and screws.
+6. Mount the empty assembly and inspect for board flex, lift-off, insert
+   movement or cracking.
+7. Add rackets gradually, beginning near the mounting back.
+8. Supervise proof loads of 1 kg, 2 kg and 3 kg at the final slot. A 3 kg tip
+   load produces approximately 6.0 N·m at the mounting interface.
+9. Remove the load immediately if anything moves or creaks. Inspect the board,
+   hooks, inserts and printed layers again after a 24-hour intended-load test.
 
-The printed rack is not structurally certified. Connector fit, board
-condition, wall anchoring, material strength and creep still require physical
-validation. Do not load ten rackets until the coupon and proof tests pass.
+The printed rack is not structurally certified. Filament, layer adhesion,
+creep, heat-set insert pull-out, actual pegboard strength, wall anchoring and
+the full ten-racket load still require physical validation.
 
 ## OpenSCAD render modes
 
-Recommended modes:
-
 | Mode | Output |
 |---|---|
-| `body_alternating` | Default alternating v2 body |
-| `body_alternating_reverse` | Reversed alternating v2 body |
-| `body_left` | All-left v2 comparison body |
-| `body_right` | All-right v2 comparison body |
-| `skadis_back_v2` | Compact SKÅDIS back |
-| `multiboard_back_v2` | Compact Multiboard back |
-| `assembled_skadis_v2` | Alternating body on SKÅDIS back |
-| `assembled_multiboard_v2` | Alternating body on Multiboard back |
-| `skadis_coupon_v2` | Full-pattern SKÅDIS coupon |
-| `multiboard_coupon_v2` | Full-pattern Multiboard coupon |
-| `body_print_preview` | Preview-only support-free build-plate view |
-| `skadis_back_rear_preview` | Preview-only SKÅDIS rear hook view |
-| `multiboard_back_preview` | Preview-only Multiboard rear view |
-| `skadis_engagement_preview` | Preview-only board and lowered hook view |
+| `body_alternating` | Alternating body beginning on the left |
+| `body_alternating_reverse` | Alternating body beginning on the right |
+| `body_left` | All-left body |
+| `body_right` | All-right body |
+| `skadis_back_v2` | SKÅDIS mounting back |
+| `multiboard_back_v2` | Multiboard mounting back |
+| `assembled_skadis_v2` | Alternating body on the SKÅDIS back |
+| `assembled_multiboard_v2` | Alternating body on the Multiboard back |
+| `skadis_coupon_v2` | Full-pattern SKÅDIS connector coupon |
+| `multiboard_coupon_v2` | Full-pattern Multiboard spacing coupon |
+| `racket_spacing_coupon_v2_2` | Three-slot 20 mm racket spacing coupon |
+| `body_print_preview` | Support-free body build-plate view |
+| `skadis_back_rear_preview` | Rear SKÅDIS connector view |
+| `multiboard_board_side_preview` | Board side with four actual Multiboard mounts |
+| `multiboard_interface_side_preview` | Body-facing key, inserts and through-holes |
+| `skadis_engagement_preview` | Rear transparent view of all three lowered SKÅDIS hooks |
+| `racket_spacing_coupon_preview` | Clean spacing coupon view |
 | `none` | No source geometry; used by tests |
 
-Compatibility aliases for the earlier mode names remain in the source. The old
-`alignment_preview` alias now shows only the printable alternating body.
+Compatibility aliases for earlier mode names remain in the source.
+`multiboard_back_preview` now maps to the four-hole board-side view.
+`alignment_preview` shows only the printable alternating body and contains no
+shaft guides.
 
 Run the dimensional suite from this directory:
 
@@ -230,4 +298,4 @@ TERM=dumb NO_COLOR=1 openscad --hardwarnings \
   tests/test_dimensions.scad
 ```
 
-A successful run echoes `V2_1_DIMENSION_TESTS_PASSED`.
+A successful run echoes `V2_2_DIMENSION_TESTS_PASSED`.
